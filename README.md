@@ -58,6 +58,10 @@ npx wrangler deploy --dry-run --outdir=.wrangler/dry
 | Fecha | Estado del proyecto | Comprimido | Uso del limite |
 | --- | --- | --- | --- |
 | 2026-09-08 | Fase 0, sitio vacio | 953 KiB | 31 % |
+| 2026-09-08 | Fase 1, panel + clientes Supabase | 1420 KiB | 47 % |
+
+El salto de 467 KiB es casi todo `@supabase/supabase-js` del lado servidor: se
+paga una vez y no se repite por cada seccion nueva.
 
 Conviene medir al cerrar cada fase. Si se acerca al techo, el panel de
 administracion sale a su propio worker antes que pagar el plan.
