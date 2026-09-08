@@ -41,6 +41,7 @@ npm run dev
 | `npm run cf-typegen` | Regenera los tipos de los bindings de Cloudflare |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run probar:politicas` | Prueba las politicas RLS con usuarios reales de cada rol |
+| `node scripts/crear-usuario.mjs <email> <rol>` | Da de alta a alguien en la redaccion o le cambia el rol |
 
 **Antes de cada despliegue hay que pasar por `npm run preview`.** El
 comportamiento de `next dev` y el del worker no son identicos, y descubrir la
