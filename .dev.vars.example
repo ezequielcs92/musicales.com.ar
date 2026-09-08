@@ -1,0 +1,14 @@
+# ---------------------------------------------------------------------------
+# Secretos para el runtime de Cloudflare Workers en desarrollo local.
+#
+# Copiar a `.dev.vars` y completar. Lo leen `wrangler dev` y `npm run preview`,
+# que es donde se prueba el comportamiento real del worker antes de desplegar.
+#
+# `.dev.vars` esta ignorado por git.
+#
+# En produccion estos valores NO salen de aca: se cargan una sola vez con
+#   npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+# y quedan guardados del lado de Cloudflare.
+# ---------------------------------------------------------------------------
+
+SUPABASE_SERVICE_ROLE_KEY=

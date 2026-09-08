@@ -1,0 +1,79 @@
+# Musicales.com.ar
+
+Medio digital sobre teatro musical argentino: cartelera, criticas, noticias,
+talleres de montaje y audiciones. Alcance de lanzamiento: CABA y Gran Buenos
+Aires.
+
+## Stack
+
+| Pieza | Eleccion |
+| --- | --- |
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Hosting | Cloudflare Workers vía [OpenNext](https://opennext.js.org/cloudflare) |
+| Datos | Supabase (Postgres + Auth), con RLS |
+| Imagenes | Cloudflare R2, servidas desde `img.musicales.com.ar` |
+| Estilos | Tailwind v4 |
+| Animacion | Motion 13 |
+
+**OpenNext y no vinext**, aunque vinext sea lo que Cloudflare recomienda hoy:
+vinext no es Next.js sino una reimplementacion de su API con huecos declarados,
+y este sitio depende de que Google lo indexe bien. Reevaluable mas adelante.
+
+## Puesta en marcha
+
+```bash
+npm install
+cp .env.example .env.local        # completar con los valores del panel de Supabase
+cp .dev.vars.example .dev.vars    # secretos para el runtime de Workers
+npm run dev
+```
+
+`.env.local` lo lee `next dev`; `.dev.vars` lo leen `wrangler dev` y
+`npm run preview`. Hay que mantener los dos en sincronia. Ninguno se commitea.
+
+## Scripts
+
+| Comando | Que hace |
+| --- | --- |
+| `npm run dev` | Desarrollo con Turbopack. Rapido, pero **no** es el runtime real |
+| `npm run preview` | Compila y sirve el worker de Cloudflare de verdad |
+| `npm run deploy` | Compila y despliega a Workers |
+| `npm run cf-typegen` | Regenera los tipos de los bindings de Cloudflare |
+| `npm run typecheck` | `tsc --noEmit` |
+
+**Antes de cada despliegue hay que pasar por `npm run preview`.** El
+comportamiento de `next dev` y el del worker no son identicos, y descubrir la
+diferencia en produccion es el error caro.
+
+## Presupuesto del worker
+
+El plan gratuito de Workers admite **3 MiB** comprimidos. Medicion actual:
+
+```bash
+npm run build && npx opennextjs-cloudflare build
+npx wrangler deploy --dry-run --outdir=.wrangler/dry
+```
+
+| Fecha | Estado del proyecto | Comprimido | Uso del limite |
+| --- | --- | --- | --- |
+| 2026-09-08 | Fase 0, sitio vacio | 953 KiB | 31 % |
+
+Conviene medir al cerrar cada fase. Si se acerca al techo, el panel de
+administracion sale a su propio worker antes que pagar el plan.
+
+## Convenciones
+
+- **Interfaz y contenido en español rioplatense.** Codigo, nombres de variables
+  y mensajes de commit en ingles.
+- **La seguridad vive en la base, no en la aplicacion.** Todo acceso a datos pasa
+  por politicas RLS de Postgres; el codigo no es la ultima linea de defensa.
+- **El rol del usuario va en `app_metadata` del JWT, nunca en `user_metadata`**,
+  que el propio usuario puede editar desde el cliente.
+- **Ningun bloque de publicidad dentro de un contenedor animado**, y todo espacio
+  publicitario con altura reservada. Es lo que mantiene el CLS bajo control.
+- **Solo se animan `transform` y `opacity`.**
+
+## Documentacion
+
+- `docs/brief-identidad.md` — identidad visual: concepto, paleta, tipografia y
+  construccion del logotipo.

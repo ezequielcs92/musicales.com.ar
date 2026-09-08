@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Identidad Musicales.com.ar
+   Telon, bombilla, sala, papel y en-cartel. Cada color tiene un trabajo
+   asignado; no se agregan colores nuevos sin actualizar docs/brief-identidad.md.
+
+   El ambar (bombilla) NO es decorativo: significa "esto esta pasando ahora".
+   --------------------------------------------------------------------------- */
+
+:root {
+  --papel: #f4f3f6;
+  --papel-2: #ffffff;
+  --papel-3: #e9e7ee;
+  --ink: #171320;
+  --ink-soft: #423b50;
+  --muted: #6f6880;
+  --rule: #d9d5e1;
+
+  --telon: #9e1b3c;
+  --telon-soft: #f5e3e8;
+  --bombilla: #e0ae42;
+  --sala: #171320;
+
+  --en-cartel: #2c6e52;
+  --en-cartel-bg: #e1efe9;
+  --ultimas: #9c5b12;
+  --ultimas-bg: #f7ebdc;
+}
+
+/* Estado por defecto del visitante: el sistema decide y no hay atributo puesto. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #131019;
+    --papel-2: #1c1826;
+    --papel-3: #262032;
+    --ink: #f0edf4;
+    --ink-soft: #c7c1d2;
+    --muted: #948ca3;
+    --rule: #332b41;
+
+    --telon: #e36285;
+    --telon-soft: #38202b;
+    --bombilla: #f0cb72;
+
+    --en-cartel: #6fc79d;
+    --en-cartel-bg: #1a2e26;
+    --ultimas: #dda05a;
+    --ultimas-bg: #312515;
+  }
+}
+
+/* Eleccion explicita del visitante: gana sobre el sistema en ambas direcciones. */
+:root[data-theme="dark"] {
+  --papel: #131019;
+  --papel-2: #1c1826;
+  --papel-3: #262032;
+  --ink: #f0edf4;
+  --ink-soft: #c7c1d2;
+  --muted: #948ca3;
+  --rule: #332b41;
+
+  --telon: #e36285;
+  --telon-soft: #38202b;
+  --bombilla: #f0cb72;
+
+  --en-cartel: #6fc79d;
+  --en-cartel-bg: #1a2e26;
+  --ultimas: #dda05a;
+  --ultimas-bg: #312515;
+}
+
+@theme inline {
+  --color-papel: var(--papel);
+  --color-papel-2: var(--papel-2);
+  --color-papel-3: var(--papel-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-telon: var(--telon);
+  --color-telon-soft: var(--telon-soft);
+  --color-bombilla: var(--bombilla);
+  --color-sala: var(--sala);
+  --color-en-cartel: var(--en-cartel);
+  --color-en-cartel-bg: var(--en-cartel-bg);
+  --color-ultimas: var(--ultimas);
+  --color-ultimas-bg: var(--ultimas-bg);
+
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Consolas, monospace;
+}
+
+body {
+  background: var(--papel);
+  color: var(--ink);
+  font-family: var(--font-serif);
+}
+
+/* Parte del publico del teatro musical tiene sensibilidad vestibular:
+   no es una cortesia opcional. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
