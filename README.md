@@ -118,7 +118,9 @@ al compilar, tomandolas de `.env.local` de la maquina que hace el build.
 npm run deploy
 ```
 
-Compila con OpenNext y sube. La primera vez sale en `musicales.<subdominio>.workers.dev`.
+Compila con OpenNext y sube directo a `musicales.com.ar`. No se usa un
+subdominio `workers.dev`: registrarlo requiere una terminal interactiva y el
+dominio ya tiene el DNS delegado a Cloudflare.
 
 **4. Habilitar el ingreso en produccion**
 
@@ -127,12 +129,11 @@ En Supabase, **Authentication → URL Configuration**, agregar la URL del sitio 
 produccion aunque funcione en local: Supabase rechaza redirigir a un dominio que
 no tiene en su lista.
 
-**5. Pasar al dominio propio**
+**5. Pendiente: redirigir `www`**
 
-Descomentar el bloque `routes` de `wrangler.jsonc`, poner `workers_dev` en
-`false`, volver a desplegar. La redireccion de `www` al dominio sin `www` se
-configura como regla 301 en el panel de Cloudflare, no como segunda ruta del
-worker: dos rutas servirian el mismo contenido en dos direcciones indexables.
+`www.musicales.com.ar` se resuelve con una regla 301 en el panel de Cloudflare
+hacia el dominio sin `www`. No va como segunda ruta del worker: dos rutas
+servirian el mismo contenido en dos direcciones indexables.
 
 ## Convenciones
 
