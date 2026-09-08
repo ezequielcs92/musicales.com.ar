@@ -86,6 +86,53 @@ Cubre 16 casos, entre ellos:
 - El publico solo ve notas publicadas, y nunca `audit_log`.
 - Publicar deja rastro en `audit_log`.
 
+## Publicar
+
+El orden importa: cada paso habilita el siguiente.
+
+**1. Autenticar Cloudflare** (una sola vez, en tu maquina)
+
+```bash
+npx wrangler login
+```
+
+Abre el navegador. El token queda en tu almacen de credenciales y no pasa por
+ningun archivo del repo.
+
+**2. Cargar el secreto en Cloudflare** (una sola vez)
+
+```bash
+npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+```
+
+Pide el valor por teclado y lo guarda del lado de Cloudflare. `.env.local` sirve
+para desarrollo; en produccion el secreto vive aca.
+
+Las variables `NEXT_PUBLIC_*` no se cargan asi: Next las incrusta en el codigo
+al compilar, tomandolas de `.env.local` de la maquina que hace el build.
+
+**3. Desplegar**
+
+```bash
+npm run deploy
+```
+
+Compila con OpenNext y sube. La primera vez sale en `musicales.<subdominio>.workers.dev`.
+
+**4. Habilitar el ingreso en produccion**
+
+En Supabase, **Authentication → URL Configuration**, agregar la URL del sitio a
+*Site URL* y a *Redirect URLs*. Sin esto el enlace de acceso al panel falla en
+produccion aunque funcione en local: Supabase rechaza redirigir a un dominio que
+no tiene en su lista.
+
+**5. Pasar al dominio propio**
+
+Descomentar el bloque `routes` de `wrangler.jsonc`, poner `workers_dev` en
+`false`, volver a desplegar. La redireccion de `www` al dominio sin `www` se
+configura como regla 301 en el panel de Cloudflare, no como segunda ruta del
+worker: dos rutas servirian el mismo contenido en dos direcciones indexables.
+
 ## Convenciones
 
 - **Interfaz y contenido en español rioplatense.** Codigo, nombres de variables

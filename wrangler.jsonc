@@ -16,7 +16,25 @@
   ],
   "observability": {
     "enabled": true
-  }
+  },
+
+  // Subdominio *.workers.dev para probar antes de exponer el dominio real.
+  // Se apaga cuando el sitio ya vive en musicales.com.ar, para no tener el
+  // mismo contenido en dos direcciones indexables.
+  "workers_dev": true
+
+  // Dominio propio. Descomentar despues del primer despliegue exitoso, cuando
+  // ya se comprobo que el worker levanta. Requiere que la zona este en la
+  // misma cuenta de Cloudflare, cosa que ya se cumple: los nameservers de
+  // musicales.com.ar apuntan a Cloudflare.
+  //
+  // "routes": [
+  //   { "pattern": "musicales.com.ar", "custom_domain": true }
+  // ],
+  //
+  // `www` NO se agrega como segunda ruta: serviria el mismo contenido en dos
+  // direcciones y eso es contenido duplicado. Va como regla de redireccion 301
+  // desde el panel de Cloudflare, hacia el dominio sin www.
 
   // ---------------------------------------------------------------------
   // Pendiente de fase 0. Descomentar a medida que existan los recursos.
