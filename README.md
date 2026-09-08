@@ -40,6 +40,7 @@ npm run dev
 | `npm run deploy` | Compila y despliega a Workers |
 | `npm run cf-typegen` | Regenera los tipos de los bindings de Cloudflare |
 | `npm run typecheck` | `tsc --noEmit` |
+| `npm run probar:politicas` | Prueba las politicas RLS con usuarios reales de cada rol |
 
 **Antes de cada despliegue hay que pasar por `npm run preview`.** El
 comportamiento de `next dev` y el del worker no son identicos, y descubrir la
@@ -60,6 +61,26 @@ npx wrangler deploy --dry-run --outdir=.wrangler/dry
 
 Conviene medir al cerrar cada fase. Si se acerca al techo, el panel de
 administracion sale a su propio worker antes que pagar el plan.
+
+## Prueba de las politicas
+
+`npm run probar:politicas` crea usuarios temporales de cada rol contra la base
+vinculada, ejecuta lo que cada uno deberia y no deberia poder hacer, y borra
+todo al terminar. Necesita `SUPABASE_SERVICE_ROLE_KEY` en `.env.local`.
+
+Correrlo **despues de cada cambio a las politicas o a los disparadores**. Un
+esquema que aplica sin errores no dice nada sobre si los permisos funcionan:
+eso solo lo dice un colaborador intentando publicar y recibiendo el rechazo.
+
+Cubre 16 casos, entre ellos:
+
+- El colaborador crea borradores, los manda a revision y **no puede publicar**.
+- Una vez en revision, el colaborador pierde la nota.
+- El autor publica lo propio y no toca lo ajeno; el editor si.
+- Nadie firma una nota a nombre de otro.
+- **Nadie se asciende de rol a si mismo.**
+- El publico solo ve notas publicadas, y nunca `audit_log`.
+- Publicar deja rastro en `audit_log`.
 
 ## Convenciones
 
