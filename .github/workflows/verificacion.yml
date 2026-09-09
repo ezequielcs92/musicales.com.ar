@@ -1,0 +1,51 @@
+name: Verificación
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  construir:
+    name: Lint, tipos y compilación
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npx eslint src
+
+      - name: Tipos
+        run: npx tsc --noEmit
+
+      # Las variables públicas se incrustan al compilar. Acá van valores de
+      # relleno: la compilación no consulta la base, solo necesita que existan.
+      - name: Compilación
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://ejemplo.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_ci
+          NEXT_PUBLIC_SITE_URL: https://musicales.com.ar
+
+      - name: Pruebas de contenido
+        run: npx tsx --test scripts/contenido.test.ts
+
+      # El techo del plan gratuito de Workers es 3 MiB comprimidos. Si un
+      # cambio lo empuja de golpe, conviene enterarse acá y no al desplegar.
+      - name: Tamaño del worker
+        run: |
+          npx opennextjs-cloudflare build
+          npx wrangler deploy --dry-run --outdir=.wrangler/ci 2>&1 | grep -i "total upload" || true
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://ejemplo.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_ci
+          NEXT_PUBLIC_SITE_URL: https://musicales.com.ar

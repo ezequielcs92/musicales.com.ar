@@ -47,6 +47,11 @@ export const metadata: Metadata = {
     images: [{ url: "/marca/open-graph.png", width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
+  // Verificacion de Search Console. Se completa poniendo el token en
+  // NEXT_PUBLIC_GOOGLE_VERIFICATION y volviendo a desplegar; no es un secreto.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

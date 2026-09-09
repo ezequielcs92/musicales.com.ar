@@ -1,0 +1,31 @@
+name: Latido
+
+# El plan gratuito de Supabase pausa los proyectos tras una semana sin
+# actividad de API. Mientras el sitio no tenga trafico que consulte la base,
+# nada la despierta. Con una consulta diaria alcanza.
+#
+# Se puede desactivar cuando el sitio tenga visitas reales sobre paginas que
+# lean de la base.
+
+on:
+  schedule:
+    # 06:17 UTC, 03:17 en Buenos Aires. A horario redondo hay cola en los
+    # ejecutores compartidos de GitHub y las tareas se retrasan.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  latido:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Despertar la base
+        run: |
+          respuesta=$(curl -sS --max-time 30 -w "\n%{http_code}" \
+            https://musicales.com.ar/api/latido)
+          cuerpo=$(echo "$respuesta" | head -n -1)
+          codigo=$(echo "$respuesta" | tail -n 1)
+          echo "$cuerpo"
+          if [ "$codigo" != "200" ]; then
+            echo "::error::La base no respondió (HTTP $codigo)"
+            exit 1
+          fi
