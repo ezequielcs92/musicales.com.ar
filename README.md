@@ -170,6 +170,12 @@ servirian el mismo contenido en dos direcciones indexables.
   quitaron en `20260909180000_sin_precios.sql`. En su lugar va el enlace a la
   fuente, donde el valor está vigente. Un precio viejo es peor que ninguno,
   porque promete algo que la sala o la escuela no va a cumplir.
+- **Los talleres llevan UNA descripción libre, no quince campos.** Estructurado
+  queda solo lo que es filtro y no se escribe: el tipo de formación
+  (desplegable) y si la inscripción está abierta (casilla). Todo lo demás
+  —horario, edades, duración, requisitos— se pega en la descripción tal como lo
+  informa la escuela. Cada escuela informa cosas distintas; quince campos
+  separados quedan vacíos.
 - **La ficha reproduce lo que informa la fuente y enlaza a ella.** No se
   parafrasea ni se completa por inferencia. Por eso `workshops.source_url` es
   obligatorio en la base.

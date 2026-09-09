@@ -985,50 +985,22 @@ export type Database = {
       }
       workshops: {
         Row: {
-          age_max: number | null
-          age_min: number | null
-          audition_required: boolean
-          contact_email: string | null
-          contact_phone: string | null
           created_at: string
           description: string | null
-          disciplines: ("canto" | "danza" | "actuacion" | "integral")[]
-          duration_weeks: number | null
-          ends_on: string | null
-          enrollment_deadline: string | null
           enrollment_open: boolean
-          final_show: boolean
-          final_show_title: string | null
-          final_show_venue_id: string | null
           id: string
           kind: "montaje" | "carrera" | "curso" | "especializacion" | "workshop"
-          level: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id: string
           slug: string
           source_url: string
-          starts_on: string | null
-          time_from: string | null
           title: string
           updated_at: string
           verified_at: string | null
-          weekday: number | null
         }
         Insert: {
-          age_max?: number | null
-          age_min?: number | null
-          audition_required?: boolean
-          contact_email?: string | null
-          contact_phone?: string | null
           created_at?: string
           description?: string | null
-          disciplines?: ("canto" | "danza" | "actuacion" | "integral")[]
-          duration_weeks?: number | null
-          ends_on?: string | null
-          enrollment_deadline?: string | null
           enrollment_open?: boolean
-          final_show?: boolean
-          final_show_title?: string | null
-          final_show_venue_id?: string | null
           id?: string
           kind?:
             | "montaje"
@@ -1036,33 +1008,17 @@ export type Database = {
             | "curso"
             | "especializacion"
             | "workshop"
-          level?: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id: string
           slug: string
           source_url: string
-          starts_on?: string | null
-          time_from?: string | null
           title: string
           updated_at?: string
           verified_at?: string | null
-          weekday?: number | null
         }
         Update: {
-          age_max?: number | null
-          age_min?: number | null
-          audition_required?: boolean
-          contact_email?: string | null
-          contact_phone?: string | null
           created_at?: string
           description?: string | null
-          disciplines?: ("canto" | "danza" | "actuacion" | "integral")[]
-          duration_weeks?: number | null
-          ends_on?: string | null
-          enrollment_deadline?: string | null
           enrollment_open?: boolean
-          final_show?: boolean
-          final_show_title?: string | null
-          final_show_venue_id?: string | null
           id?: string
           kind?:
             | "montaje"
@@ -1070,25 +1026,14 @@ export type Database = {
             | "curso"
             | "especializacion"
             | "workshop"
-          level?: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id?: string
           slug?: string
           source_url?: string
-          starts_on?: string | null
-          time_from?: string | null
           title?: string
           updated_at?: string
           verified_at?: string | null
-          weekday?: number | null
         }
         Relationships: [
-          {
-            foreignKeyName: "workshops_final_show_venue_id_fkey"
-            columns: ["final_show_venue_id"]
-            isOneToOne: false
-            referencedRelation: "venues"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "workshops_school_id_fkey"
             columns: ["school_id"]

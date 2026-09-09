@@ -105,30 +105,24 @@ for (const t of datos.talleres) {
     continue;
   }
 
+  // Estructurado queda solo lo que es filtro: el tipo de formacion y si la
+  // inscripcion esta abierta. Todo lo demas —horarios, edades, duracion,
+  // requisitos— va en la descripcion, tal como lo informa la escuela.
   const fila = {
     slug: aSlug(`${t.school_slug}-${t.title}`),
     school_id,
     title: t.title,
     kind: t.kind,
-    disciplines: t.disciplines ?? [],
-    level: t.level ?? "todos",
-    age_min: t.age_min ?? null,
-    age_max: t.age_max ?? null,
-    weekday: t.weekday ?? null,
-    time_from: t.time_from ?? null,
-    final_show: t.final_show ?? false,
-    audition_required: t.audition_required ?? false,
+    description: t.descripcion ?? null,
     enrollment_open: t.enrollment_open ?? false,
-    // Sin precios, por decision editorial. Si el relevamiento trae un monto,
-    // se descarta: la base ya no tiene donde ponerlo.
     source_url,
-    // Nulo a propósito: relevado no es verificado. Lo completa una persona.
+    // Nulo a proposito: relevado no es verificado. Lo completa una persona.
     verified_at: null,
   };
 
   if (!aplicar) {
-    const faltan = t.faltan?.length ? `  falta: ${t.faltan.join(", ")}` : "";
-    console.log(`  taller   ${fila.kind.padEnd(16)} ${t.title}${faltan}`);
+    const sinDesc = t.descripcion ? "" : "  (sin descripcion)";
+    console.log(`  taller   ${fila.kind.padEnd(16)} ${t.title}${sinDesc}`);
     talleresOk++;
     continue;
   }

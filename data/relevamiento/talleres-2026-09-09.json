@@ -5,7 +5,8 @@
     "metodo": "Búsqueda web y lectura de los sitios oficiales de cada escuela.",
     "advertencia": "Nada de esto está confirmado con la escuela. Los precios y horarios cambian sin aviso y varias escuelas no los publican. Verificar antes de publicar: cada ficha lleva `verificado: false` hasta que alguien lo chequee.",
     "campos_faltantes_sistematicos": "El horario es el dato que casi ninguna escuela publica. Comunicanto es la excepción. Ese hueco es la oportunidad del sitio.",
-    "politica_precios": "El sitio no publica precios. Los montos relevados se descartan a propósito: no se guardan ni se muestran. Lo que se publica es el enlace a la fuente, donde el precio está vigente."
+    "politica_precios": "El sitio no publica precios. Los montos relevados se descartan a propósito: no se guardan ni se muestran. Lo que se publica es el enlace a la fuente, donde el precio está vigente.",
+    "formato": "Los datos del taller van en una sola descripción libre, tal como los informa la escuela. Estructurados quedan solo el tipo de formación y si la inscripción está abierta, porque son los filtros del sitio."
   },
   "escuelas": [
     {
@@ -76,225 +77,83 @@
       "school_slug": "comunicanto",
       "title": "Comedia Musical · Infantil 6 a 10",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "inicial",
-      "age_min": 6,
-      "age_max": 10,
-      "weekday": 1,
-      "time_from": "18:15",
-      "time_to": "19:45",
-      "final_show": true,
       "enrollment_open": true,
-      "enrollment_note": "El sitio decía «últimos días de inscripción» al relevar.",
-      "verificado": false
+      "verificado": false,
+      "descripcion": "Nivel inicial. De 6 a 10 años. Lunes de 18:15 a 19:45. Incluye canto, danza, actuación. Termina en función. El sitio decía «últimos días de inscripción» al relevar."
     },
     {
       "school_slug": "comunicanto",
       "title": "Comedia Musical · Infantil 10 a 13",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "inicial",
-      "age_min": 10,
-      "age_max": 13,
-      "weekday": 2,
-      "time_from": "18:15",
-      "time_to": "19:45",
-      "final_show": true,
       "enrollment_open": true,
-      "verificado": false
+      "verificado": false,
+      "descripcion": "Nivel inicial. De 10 a 13 años. Martes de 18:15 a 19:45. Incluye canto, danza, actuación. Termina en función."
     },
     {
       "school_slug": "comunicanto",
       "title": "Comedia Musical · Jóvenes 14 a 18",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "intermedio",
-      "age_min": 14,
-      "age_max": 18,
-      "weekday": 4,
-      "time_from": "19:00",
-      "time_to": "20:45",
-      "final_show": true,
       "enrollment_open": true,
-      "verificado": false
+      "verificado": false,
+      "descripcion": "Nivel intermedio. De 14 a 18 años. Jueves de 19:00 a 20:45. Incluye canto, danza, actuación. Termina en función."
     },
     {
       "school_slug": "comunicanto",
       "title": "Comedia Musical · Jóvenes y adultos",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "todos",
-      "age_min": 18,
-      "weekday": 2,
-      "time_from": "20:00",
-      "time_to": "22:00",
-      "final_show": true,
       "enrollment_open": true,
-      "verificado": false
+      "verificado": false,
+      "descripcion": "Abierto a todos los niveles. Desde los 18 años. Martes de 20:00 a 22:00. Incluye canto, danza, actuación. Termina en función."
     },
     {
       "school_slug": "adi-studio",
       "title": "Taller de Comedia Musical para Niños",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "inicial",
-      "age_min": 7,
-      "age_max": 12,
-      "final_show": true,
-      "final_show_note": "Montajes de comedias musicales completas en salas teatrales.",
-      "horas_semanales": 3,
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ]
+      "descripcion": "Nivel inicial. De 7 a 12 años. 3 horas semanales. Incluye canto, danza, actuación. Montajes de comedias musicales completas en salas teatrales. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "adi-studio",
       "title": "Taller de Comedia Musical Teens",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "intermedio",
-      "age_min": 13,
-      "age_max": 15,
-      "final_show": true,
-      "horas_semanales": 4,
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ]
+      "descripcion": "Nivel intermedio. De 13 a 15 años. 4 horas semanales. Incluye canto, danza, actuación. Termina en función. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "adi-studio",
       "title": "Taller de Comedia Musical Adultos",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "todos",
-      "age_min": 18,
-      "final_show": true,
-      "horas_semanales": 3,
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ]
+      "descripcion": "Abierto a todos los niveles. Desde los 18 años. 3 horas semanales. Incluye canto, danza, actuación. Termina en función. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "escuela-juan-rodo",
       "title": "Taller formativo para niños",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "inicial",
-      "age_min": 7,
-      "age_max": 11,
-      "final_show": true,
-      "final_show_note": "Montaje de distintos cuadros musicales.",
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ]
+      "descripcion": "Nivel inicial. De 7 a 11 años. Incluye canto, danza, actuación. Montaje de distintos cuadros musicales. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "escuela-juan-rodo",
       "title": "Taller para adolescentes",
       "kind": "montaje",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion"
-      ],
-      "level": "intermedio",
-      "age_min": 12,
-      "age_max": 16,
-      "final_show": true,
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ]
+      "descripcion": "Nivel intermedio. De 12 a 16 años. Incluye canto, danza, actuación. Termina en función. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "escuela-juan-rodo",
       "title": "Formación de tres años",
       "kind": "carrera",
-      "disciplines": [
-        "canto",
-        "danza",
-        "actuacion",
-        "integral"
-      ],
-      "level": "avanzado",
-      "age_min": 17,
-      "age_max": 50,
-      "duration_years": 3,
-      "final_show": true,
-      "final_show_note": "Obras de texto, conciertos de canto, muestras coreográficas y musicales integrales.",
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion"
-      ],
-      "nota": "Reclasificada de `entrenamiento` a `carrera` al ampliarse el enumerado: es formación larga con titulación, no un taller."
+      "nota": "Reclasificada de `entrenamiento` a `carrera` al ampliarse el enumerado: es formación larga con titulación, no un taller.",
+      "descripcion": "Nivel avanzado. De 17 a 50 años. Duración: 3 años. Incluye canto, danza, actuación, integración escénica. Obras de texto, conciertos de canto, muestras coreográficas y musicales integrales. La escuela no publica el día, el horario ni el estado de inscripción; consultar en su sitio."
     },
     {
       "school_slug": "escuela-juan-rodo",
       "title": "Taller de Montaje Profesional (TMP)",
       "kind": "montaje",
-      "disciplines": [
-        "integral"
-      ],
-      "level": "avanzado",
-      "final_show": true,
-      "final_show_note": "Montaje de repertorio internacional.",
-      "audition_required": true,
-      "audition_note": "Restringido a alumnos avanzados y egresados. Confirmar si hay audición formal o es solo por trayecto interno.",
       "verificado": false,
-      "faltan": [
-        "dia",
-        "horario",
-        "inscripcion",
-        "abierto_a_externos"
-      ]
+      "descripcion": "Nivel avanzado. Incluye integración escénica. Montaje de repertorio internacional. Restringido a alumnos avanzados y egresados. La escuela no publica el día, el horario, el estado de inscripción ni si admite alumnos externos; consultar en su sitio."
     }
   ],
   "descartadas": [
