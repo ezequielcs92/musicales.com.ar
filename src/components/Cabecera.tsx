@@ -2,14 +2,22 @@ import Link from "next/link";
 
 import { LogoMarca } from "@/components/LogoMarca";
 
-// Siete secciones no entran en una barra. Van las cuatro de mayor intencion
-// de busqueda; el pie lleva el mapa completo.
-const ENLACES = [
+// Siete secciones no entran en una barra de escritorio. Van las cuatro de mayor
+// intencion de busqueda; el pie lleva el mapa completo.
+const PRINCIPALES = [
   { href: "/cartelera", texto: "Cartelera" },
   { href: "/talleres", texto: "Talleres" },
   { href: "/audiciones", texto: "Audiciones" },
   { href: "/criticas", texto: "Críticas" },
-];
+] as const;
+
+// En telefono si entran las siete, en una fila que se desplaza sola.
+const TODAS = [
+  ...PRINCIPALES,
+  { href: "/salas", texto: "Salas" },
+  { href: "/noticias", texto: "Noticias" },
+  { href: "/eventos", texto: "Eventos" },
+] as const;
 
 export function Cabecera() {
   return (
@@ -32,7 +40,7 @@ export function Cabecera() {
         </Link>
 
         <nav aria-label="Secciones" className="ml-auto hidden gap-6 lg:flex">
-          {ENLACES.map((e) => (
+          {PRINCIPALES.map((e) => (
             <Link
               key={e.href}
               href={e.href}
@@ -45,11 +53,32 @@ export function Cabecera() {
 
         <Link
           href="/ingresar"
-          className="boton shrink-0 px-4 py-2 text-sm sm:px-6 sm:py-3 md:ml-4"
+          className="boton shrink-0 px-4 py-2 text-sm sm:px-6 sm:py-3 lg:ml-4"
         >
           Redacción
         </Link>
       </div>
+
+      {/* Navegacion de telefono y tableta. Una fila que se desplaza, sin menu
+          desplegable: no necesita JavaScript, no tapa la pagina y deja las
+          siete secciones a un toque. */}
+      <nav
+        aria-label="Secciones"
+        className="border-t border-white/10 lg:hidden"
+      >
+        <ul className="contenedor flex gap-5 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {TODAS.map((e) => (
+            <li key={e.href} className="shrink-0">
+              <Link
+                href={e.href}
+                className="text-[0.82rem] font-medium whitespace-nowrap text-[var(--on-dark-muted)] transition-colors hover:text-white"
+              >
+                {e.texto}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }
