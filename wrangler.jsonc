@@ -18,6 +18,14 @@
     "enabled": true
   },
 
+  // Solo medios. El binding del caché incremental
+  // (NEXT_INC_CACHE_R2_BUCKET) está fuera a propósito: al declararlo, el
+  // despliegue precarga el caché objeto por objeto y esas escrituras no
+  // completan desde esta conexión. Ver open-next.config.ts.
+  "r2_buckets": [
+    { "binding": "MEDIA", "bucket_name": "musicales-media" }
+  ],
+
   // Sin subdominio *.workers.dev: registrarlo requiere una terminal
   // interactiva y el sitio va directo al dominio real, que ya tiene el DNS
   // delegado a Cloudflare.
@@ -28,21 +36,4 @@
   // redireccion 301 desde el panel de Cloudflare, hacia el dominio sin www.
   "routes": [{ "pattern": "musicales.com.ar", "custom_domain": true }]
 
-  // ---------------------------------------------------------------------
-  // Pendiente de fase 0. Descomentar a medida que existan los recursos.
-  //
-  // Buckets R2. El primero lo usa OpenNext para el caché incremental de ISR;
-  // verificar el nombre exacto del binding contra la version instalada de
-  // @opennextjs/cloudflare antes de activarlo.
-  //
-  // "r2_buckets": [
-  //   { "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "musicales-cache" },
-  //   { "binding": "MEDIA", "bucket_name": "musicales-media" }
-  // ],
-  //
-  // Tarea diaria: mantiene despierto el proyecto de Supabase, que en plan
-  // gratuito se pausa tras una semana sin actividad.
-  //
-  // "triggers": { "crons": ["17 6 * * *"] }
-  // ---------------------------------------------------------------------
 }
