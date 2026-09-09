@@ -1,0 +1,81 @@
+{
+  "relevamiento": {
+    "fecha": "2026-09-09",
+    "fuente": "Alternativa Teatral — cartelera, categoría Musical (https://www.alternativateatral.com/cartelera.asp?cat=5-musical)",
+    "metodo": "Listado de la categoría Musical y lectura de la ficha de cada obra para confirmar el género. Se tomaron datos de hecho —título, sala, funciones, enlace de entradas— no textos ni sinopsis, que son de su autoría.",
+    "hallazgo": "Su categoría «Musical» es un cajón de sastre: de 18 espectáculos, la mayoría son shows de tango, recitales, cabaret y hasta una experiencia sonora a oscuras. Solo 4 son teatro musical confirmado. Ese es justamente el hueco que este sitio llena: acá «musical» significa teatro musical.",
+    "advertencia": "Nada verificado con la sala ni la productora. Los horarios se toman de la fuente y cambian sin aviso.",
+    "sin_precios": "Se descartaron los importes que la fuente publica. El sitio no publica precios."
+  },
+
+  "obras": [
+    {
+      "slug": "popotitos-el-musical",
+      "title": "Popotitos, el musical",
+      "sala_nombre": "Teatro Premier",
+      "sala_direccion": "Av. Corrientes 1565, CABA",
+      "director": "Augusto Álvarez y Gustavo Guzmán",
+      "elenco": "Camila Bellusci, Diego Cassere, Rodrigo Devita, Stella Maris Faggiano, Pacota González, Adrián Martín Juan, Luis Podestá, Sheila Saslavsky, Lucía Sciacca",
+      "funciones": "Martes 21:00",
+      "ticket_url": "https://www.plateanet.com/obra/21534?obra=POPOTITOS---EL-MUSICAL&paso=inicio",
+      "source_url": "https://www.alternativateatral.com/obra76138-popotitos-el-musical",
+      "generos_fuente": "Musical, Teatro, Presencial, Adultos",
+      "confirmado_musical": true
+    },
+    {
+      "slug": "santos-vega",
+      "title": "Santos Vega",
+      "sala_nombre": "Teatro Nacional Cervantes",
+      "sala_direccion": "Libertad 815, CABA",
+      "director": "Daniel Casablanca",
+      "funciones": "Jueves a domingo 20:00",
+      "closes_on": "2026-12-13",
+      "source_url": "https://www.alternativateatral.com/obra102684-santos-vega",
+      "generos_fuente": "Teatro, Presencial, Adultos, Musical, Artes Escénicas",
+      "confirmado_musical": true
+    },
+    {
+      "slug": "el-mago-de-oz-cervantes",
+      "title": "El Mago de Oz",
+      "sala_nombre": "Teatro Nacional Cervantes",
+      "sala_direccion": "Libertad 815, CABA",
+      "funciones": "Sábados y domingos 16:00",
+      "closes_on": "2026-09-27",
+      "ticket_url": "https://ventas.teatrocervantes.gob.ar/",
+      "source_url": "https://www.alternativateatral.com/obra101768-el-mago-de-oz",
+      "generos_fuente": "Comedia, Musical, Teatro, Presencial, Infantiles",
+      "confirmado_musical": true
+    },
+    {
+      "slug": "anna-y-elsa-un-musical-entre-hielos",
+      "title": "Anna y Elsa: un musical entre hielos",
+      "sala_nombre": "Terraza Teatro Bar",
+      "sala_direccion": "Av. Corrientes 1660, CABA",
+      "funciones": "Sábados y domingos 17:00",
+      "ticket_url": "https://publico.alternativateatral.com/entradas80506-anna-y-elsa-un-musical-entre-hielos",
+      "source_url": "https://www.alternativateatral.com/obra80506-anna-y-elsa-un-musical-entre-hielos",
+      "generos_fuente": "Musical, Presencial, Infantiles",
+      "confirmado_musical": true
+    }
+  ],
+
+  "a_revisar": [
+    { "titulo": "SANTA BÁRBARA. Una ópera pobre de CRIMI", "sala": "Centro Cultural Molière", "motivo": "Se declara ópera. Decidir si la ópera contemporánea entra en el alcance del sitio." },
+    { "titulo": "Horas Extras", "sala": "Teatro Border", "motivo": "No se pudo confirmar si es teatro musical o teatro con música." },
+    { "titulo": "Las nietas de rubí ensayan", "sala": "Sala de los Pompapetriyasos", "motivo": "Sin confirmar." },
+    { "titulo": "Relatos de Noche", "sala": "Casa Guayra", "motivo": "Sin confirmar." },
+    { "titulo": "El salpicón", "sala": "Nün Teatro Bar", "motivo": "Sin confirmar." },
+    { "titulo": "La Cumbia Triste", "sala": "Teatro Azul", "motivo": "Sin confirmar." }
+  ],
+
+  "descartadas": [
+    { "titulo": "Experiencia sensorial inmersiva en total oscuridad", "motivo": "Experiencia sonora, no teatro musical." },
+    { "titulo": "El Circuito - Espacio Escénico Abierto", "motivo": "Ciclo de escena abierta, no una obra." },
+    { "titulo": "Cantada - Festival de Microrecitales de Cantantes", "motivo": "Festival de recitales." },
+    { "titulo": "PORTEÑO CARAJO! TANGO Y BURLESQUE", "motivo": "Show de tango y burlesque." },
+    { "titulo": "CESAR MACIÚ - VIVA EL TANGO", "motivo": "Recital de tango." },
+    { "titulo": "Cabaret Porteño", "motivo": "Cabaret y tango." },
+    { "titulo": "Tango Furia", "motivo": "Tango, y además en Mar del Plata: fuera del alcance de lanzamiento." },
+    { "titulo": "Vuelta Canela -Queridas Canciones-", "motivo": "Grupo de música infantil, y en Bariloche: fuera del alcance." }
+  ]
+}

@@ -702,6 +702,7 @@ export type Database = {
           opens_on: string
           producer: string | null
           production_id: string
+          schedule_note: string | null
           status: "anunciada" | "en_cartel" | "finalizada"
           ticket_url: string | null
           ticketing: string | null
@@ -716,6 +717,7 @@ export type Database = {
           opens_on: string
           producer?: string | null
           production_id: string
+          schedule_note?: string | null
           status?: "anunciada" | "en_cartel" | "finalizada"
           ticket_url?: string | null
           ticketing?: string | null
@@ -730,6 +732,7 @@ export type Database = {
           opens_on?: string
           producer?: string | null
           production_id?: string
+          schedule_note?: string | null
           status?: "anunciada" | "en_cartel" | "finalizada"
           ticket_url?: string | null
           ticketing?: string | null

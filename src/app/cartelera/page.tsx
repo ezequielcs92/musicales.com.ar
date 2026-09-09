@@ -25,7 +25,7 @@ export default async function Cartelera() {
   const { data, error } = await supabase
     .from("runs")
     .select(
-      "id, status, opens_on, closes_on, ticket_url, producer, productions(slug, title, synopsis, is_original_arg, duration_min), venues(name, address, neighborhood)",
+      "id, status, opens_on, closes_on, ticket_url, producer, schedule_note, productions(slug, title, synopsis, is_original_arg, duration_min), venues(name, address, neighborhood)",
     )
     .in("status", ["en_cartel", "anunciada"])
     .order("status")
@@ -114,16 +114,32 @@ export default async function Cartelera() {
                   </p>
                 </div>
 
+                {/* El horario como lo informa la fuente. No se generan
+                    funciones concretas a partir de una frase: un feriado o una
+                    suspensión convertiría el dato en mentira. */}
+                {t.schedule_note && (
+                  <p className="font-mono text-[0.8rem] uppercase tracking-[0.06em] text-[var(--bombilla)]">
+                    {t.schedule_note}
+                  </p>
+                )}
+
                 {obra?.synopsis && (
                   <p className="text-[0.95rem] leading-relaxed text-[var(--muted)]">
                     {obra.synopsis}
                   </p>
                 )}
 
-                <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.84rem] text-[var(--muted)]">
-                  {t.opens_on && <span>Desde el {fecha(t.opens_on)}</span>}
-                  {t.closes_on && <span>hasta el {fecha(t.closes_on)}</span>}
-                </p>
+                {t.producer && (
+                  <p className="text-[0.9rem] text-[var(--muted)]">
+                    Dirección: {t.producer}
+                  </p>
+                )}
+
+                {t.closes_on && (
+                  <p className="text-[0.84rem] text-[var(--muted)]">
+                    Hasta el {fecha(t.closes_on)}
+                  </p>
+                )}
 
                 {/* Reemplaza al precio: la boletería tiene el valor vigente. */}
                 {t.ticket_url && (
