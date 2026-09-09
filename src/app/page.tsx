@@ -2,39 +2,7 @@ import Link from "next/link";
 
 import { Cabecera } from "@/components/Cabecera";
 import { PieDePagina } from "@/components/PieDePagina";
-
-// Temporada 2026 relevada. Todavia no sale de la base: la cartelera se conecta
-// en la fase 2. Se marca aca para que nadie lo confunda con datos en vivo.
-const EN_CARTEL = [
-  {
-    titulo: "Drácula, la resurrección",
-    sala: "Teatro El Nacional",
-    dato: "Miércoles a domingo · 20:30",
-    estado: "cartel" as const,
-    etiqueta: "En cartel",
-  },
-  {
-    titulo: "Company",
-    sala: "Dirección de Fer Dente",
-    dato: "Jueves a domingo · 21:00",
-    estado: "ultimas" as const,
-    etiqueta: "Últimas funciones",
-  },
-  {
-    titulo: "Hairspray",
-    sala: "Con Damián Betular",
-    dato: "Desde el 4 de abril",
-    estado: "estreno" as const,
-    etiqueta: "Estreno",
-  },
-  {
-    titulo: "Chicago",
-    sala: "Dirección de Ricky Pashkus",
-    dato: "Viernes a domingo · 20:00",
-    estado: "cartel" as const,
-    etiqueta: "En cartel",
-  },
-];
+import { clientePublico } from "@/lib/publico";
 
 const SECCIONES = [
   {
@@ -77,13 +45,43 @@ const DIFERENCIAS = [
   },
 ];
 
-const CHIP = {
-  cartel: "chip chip-cartel",
-  ultimas: "chip chip-ultimas",
-  estreno: "chip chip-estreno",
-};
+export const revalidate = 3600;
 
-export default function Home() {
+export default async function Home() {
+  // Se cuenta contra la base, no se escribe a mano: si mañana hay más, la
+  // portada lo dice sola.
+  const supabase = clientePublico();
+  const [salas, talleres, montajes] = await Promise.all([
+    supabase.from("venues").select("*", { count: "exact", head: true }),
+    supabase.from("workshops").select("*", { count: "exact", head: true }),
+    supabase
+      .from("workshops")
+      .select("*", { count: "exact", head: true })
+      .eq("kind", "montaje")
+      .eq("enrollment_open", true),
+  ]);
+
+  const CIFRAS = [
+    {
+      n: salas.count ?? 0,
+      que: "Salas",
+      detalle: "Con dirección y forma de contacto",
+      href: "/salas" as const,
+    },
+    {
+      n: talleres.count ?? 0,
+      que: "Propuestas de formación",
+      detalle: "Montaje, carreras, cursos y workshops",
+      href: "/talleres" as const,
+    },
+    {
+      n: montajes.count ?? 0,
+      que: "Con inscripción abierta",
+      detalle: "Talleres de montaje tomando gente ahora",
+      href: "/talleres" as const,
+    },
+  ];
+
   return (
     <>
       <Cabecera />
@@ -136,10 +134,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* La marquesina: el gesto de la marca hecho objeto. */}
+          {/* Lo que hay de verdad en la base, contado en vivo. Antes acá
+              había una cartelera escrita a mano que resultó tener datos
+              equivocados: una obra en la sala que no era. Números reales o
+              nada. */}
           <div className="entrada entrada-3 tarjeta w-full overflow-hidden p-0">
             <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
-              <span className="antetitulo">Esta semana</span>
+              <span className="antetitulo">Ya cargado</span>
               <div className="bombillas" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, i) => (
                   <i key={i} />
@@ -147,22 +148,24 @@ export default function Home() {
               </div>
             </div>
             <ul className="flex flex-col">
-              {EN_CARTEL.map((o) => (
+              {CIFRAS.map((c) => (
                 <li
-                  key={o.titulo}
-                  className="flex flex-col gap-2 border-b border-white/10 px-5 py-4 last:border-b-0"
+                  key={c.que}
+                  className="flex items-baseline gap-4 border-b border-white/10 px-5 py-4 last:border-b-0"
                 >
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className={CHIP[o.estado]}>{o.etiqueta}</span>
-                    <span className="text-[0.7rem] text-[var(--on-dark-muted)]">
-                      {o.dato}
-                    </span>
-                  </div>
-                  <span className="font-display text-xl uppercase leading-none tracking-tight">
-                    {o.titulo}
+                  <span className="font-display text-3xl leading-none tabular-nums text-[var(--bombilla)]">
+                    {c.n}
                   </span>
-                  <span className="text-sm text-[var(--on-dark-muted)]">
-                    {o.sala}
+                  <span className="flex flex-col">
+                    <Link
+                      href={c.href}
+                      className="font-display text-lg uppercase leading-none tracking-tight hover:underline"
+                    >
+                      {c.que}
+                    </Link>
+                    <span className="text-sm text-[var(--on-dark-muted)]">
+                      {c.detalle}
+                    </span>
                   </span>
                 </li>
               ))}
