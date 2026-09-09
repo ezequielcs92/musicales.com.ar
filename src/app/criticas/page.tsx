@@ -1,28 +1,47 @@
 import type { Metadata } from "next";
 
-import { NO_INDEXAR, SeccionEnPreparacion } from "@/components/SeccionEnPreparacion";
+import {
+  ListadoEditorial,
+  SECCIONES_PUBLICAS,
+  type NotaListado,
+} from "@/components/Editorial";
+import { clientePublico } from "@/lib/publico";
+
+const RUTA = "criticas";
+const CFG = SECCIONES_PUBLICAS[RUTA];
 
 export const metadata: Metadata = {
-  title: "Críticas",
-  description: "Críticas de teatro musical argentino.",
-  ...NO_INDEXAR,
+  title: CFG.titulo.replace(".", ""),
+  description: CFG.descripcion,
 };
 
-const PROMESAS = [
-  { clave: "Con fecha de función", texto: "Una crítica sin fecha es una opinión sobre una obra que ya cambió de elenco." },
-  { clave: "Con el elenco de esa noche", texto: "Quién hacía cada rol cuando se escribió. Es parte de la crítica, no un dato de color." },
-  { clave: "Firmadas", texto: "Cada texto lleva autor. Las opiniones tienen responsable." },
-  { clave: "Separadas de las reseñas del público", texto: "La crítica la firma la redacción. Más adelante el público va a poder puntuar aparte." },
-];
+// Una nota nueva tiene que aparecer pronto, pero no en cada visita.
+export const revalidate = 600;
 
-export default function Criticas() {
-  return (
-    <SeccionEnPreparacion
-      antetitulo="En preparación"
-      titulo={"Críticas que dicen qué noche vieron."}
-      bajada={"Reseñas firmadas, con la fecha de la función y el elenco que estaba en escena."}
-      promesas={PROMESAS}
-      cuando={"Las primeras críticas salen cuando la cartelera esté cargada: no tiene sentido criticar una función sin poder enlazar a la obra, la sala y el elenco."}
-    />
-  );
+export default async function Seccion() {
+  const supabase = clientePublico();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("id, slug, title, dek, published_at, rating, seen_on, profiles!articles_author_id_fkey(display_name)")
+    .eq("section", CFG.seccion)
+    .eq("status", "publicado")
+    .lte("published_at", new Date().toISOString())
+    .order("published_at", { ascending: false })
+    .limit(50);
+
+  const notas: NotaListado[] = (data ?? []).map((n) => {
+    const autor = Array.isArray(n.profiles) ? n.profiles[0] : n.profiles;
+    return {
+      id: n.id,
+      slug: n.slug,
+      title: n.title,
+      dek: n.dek,
+      published_at: n.published_at,
+      rating: n.rating,
+      seen_on: n.seen_on,
+      autor: autor?.display_name ?? null,
+    };
+  });
+
+  return <ListadoEditorial ruta={RUTA} notas={notas} error={Boolean(error)} />;
 }

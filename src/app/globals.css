@@ -332,3 +332,60 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- Cuerpo de nota ------------------------------------------------------ */
+/* El HTML lo genera `renderizarContenido` desde Markdown, asi que no se le
+   pueden poner clases: se estila por elemento. */
+
+.prosa {
+  font-size: 1.08rem;
+  line-height: 1.72;
+}
+.prosa > * + * { margin-top: 1.1em; }
+.prosa h2,
+.prosa h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  margin-top: 2em;
+  text-wrap: balance;
+}
+.prosa h2 { font-size: 1.75rem; }
+.prosa h3 { font-size: 1.3rem; }
+.prosa a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prosa ul,
+.prosa ol { padding-left: 1.3em; }
+.prosa ul { list-style: disc; }
+.prosa ol { list-style: decimal; }
+.prosa li + li { margin-top: 0.4em; }
+.prosa blockquote {
+  border-left: 3px solid var(--violet);
+  padding-left: 1.2em;
+  font-size: 1.14rem;
+  color: var(--ink-soft, var(--text));
+}
+.prosa img {
+  border-radius: var(--radio-sm);
+  height: auto;
+}
+.prosa figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5em;
+}
+.prosa code {
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.prosa hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin-block: 2.4em;
+}

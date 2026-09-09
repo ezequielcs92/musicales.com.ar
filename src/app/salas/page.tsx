@@ -1,28 +1,70 @@
 import type { Metadata } from "next";
 
-import { NO_INDEXAR, SeccionEnPreparacion } from "@/components/SeccionEnPreparacion";
+import { PaginaPublica } from "@/components/PaginaPublica";
+import { clientePublico } from "@/lib/publico";
+
+import { ListaSalas, type SalaPublica } from "./ListaSalas";
 
 export const metadata: Metadata = {
   title: "Salas",
-  description: "Salas de teatro musical en Buenos Aires: contacto y cómo llegar.",
-  ...NO_INDEXAR,
+  description:
+    "Salas de teatro de la Ciudad de Buenos Aires: dirección, capacidad y cómo contactarlas.",
 };
 
-const PROMESAS = [
-  { clave: "Formas de contacto reales", texto: "Teléfono, correo, WhatsApp y redes. Con la vía que de verdad contesta, no la que figura de adorno." },
-  { clave: "Cómo llegar", texto: "Dirección, barrio y ubicación. Para decidir si te queda cerca antes de sacar la entrada." },
-  { clave: "Capacidad y accesibilidad", texto: "Cuántas butacas tiene y si es accesible en silla de ruedas." },
-  { clave: "Qué hay en cartel ahí", texto: "Todo lo que se está dando en esa sala, enlazado a su ficha." },
-];
+// Las salas casi no cambian. Se regenera una vez por día.
+export const revalidate = 86400;
 
-export default function Salas() {
+export default async function Salas() {
+  const supabase = clientePublico();
+  const { data, error } = await supabase
+    .from("venues")
+    .select("id, slug, name, address, neighborhood, seats, phone, email, website, socials, lat, lng")
+    .order("name");
+
+  const salas: SalaPublica[] = (data ?? []).map((s) => ({
+    id: s.id,
+    slug: s.slug,
+    name: s.name,
+    address: s.address,
+    neighborhood: s.neighborhood,
+    seats: s.seats,
+    phone: s.phone,
+    email: s.email,
+    website: s.website,
+    instagram:
+      (s.socials as Record<string, string> | null)?.instagram ?? null,
+    lat: s.lat ? Number(s.lat) : null,
+    lng: s.lng ? Number(s.lng) : null,
+  }));
+
   return (
-    <SeccionEnPreparacion
-      antetitulo="En preparación"
-      titulo={"Las salas, y cómo contactarlas."}
-      bajada={"Dónde queda cada una, cómo se llega y por dónde escribirles. Pensado para que puedas comunicarte, no solo para saber que existen."}
-      promesas={PROMESAS}
-      cuando={"Se carga junto con la cartelera: una función sin sala es un dato incompleto. Si trabajás en una sala y querés revisar tus datos, escribinos."}
-    />
+    <PaginaPublica
+      antetitulo="Salas"
+      titulo="Las salas, y cómo contactarlas."
+      bajada={`${salas.length} salas de teatro de la Ciudad de Buenos Aires, con dirección, capacidad y la vía para escribirles o llamarlas.`}
+    >
+      {error ? (
+        <p role="alert" className="text-[var(--primary)]">
+          No pudimos cargar las salas. Probá de nuevo en unos minutos.
+        </p>
+      ) : (
+        <>
+          <ListaSalas salas={salas} />
+          <p className="mt-10 max-w-[64ch] border-l-2 border-[var(--primary)] pl-5 text-[0.9rem] text-[var(--muted)]">
+            Datos de{" "}
+            <a
+              href="https://data.buenosaires.gob.ar/dataset/espacios-culturales"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--primary)] underline underline-offset-2"
+            >
+              Buenos Aires Data ↗
+            </a>
+            , Ministerio de Cultura de la Ciudad. Si administrás una sala y
+            querés corregir o completar su ficha, escribinos.
+          </p>
+        </>
+      )}
+    </PaginaPublica>
   );
 }

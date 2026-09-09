@@ -7,7 +7,7 @@ import {
 } from "@/components/Editorial";
 import { clientePublico } from "@/lib/publico";
 
-const RUTA = "noticias";
+const RUTA = "opiniones";
 const CFG = SECCIONES_PUBLICAS[RUTA];
 
 export const metadata: Metadata = {
