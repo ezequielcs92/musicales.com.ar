@@ -20,7 +20,20 @@ export type Estado =
   | "publicado"
   | "archivado";
 
-export type Seccion = "noticias" | "opiniones" | "reviews" | "entrevistas";
+export type Seccion =
+  | "noticias"
+  | "blog"
+  | "opiniones"
+  | "reviews"
+  | "entrevistas";
+
+/** Los cinco tipos de formacion. `montaje` es el unico que termina en funcion. */
+export type TipoFormacion =
+  | "montaje"
+  | "carrera"
+  | "curso"
+  | "especializacion"
+  | "workshop";
 
 export const esStaff = (rol: Rol) => rol === "editor" || rol === "administrador";
 
@@ -59,7 +72,25 @@ export const ETIQUETA_ROL: Record<Rol, string> = {
 
 export const SECCIONES: { valor: Seccion; etiqueta: string }[] = [
   { valor: "noticias", etiqueta: "Noticias" },
+  { valor: "blog", etiqueta: "Blog" },
   { valor: "opiniones", etiqueta: "Opiniones" },
   { valor: "reviews", etiqueta: "Críticas" },
   { valor: "entrevistas", etiqueta: "Entrevistas" },
 ];
+
+export const ETIQUETA_FORMACION: Record<TipoFormacion, string> = {
+  montaje: "Taller de montaje",
+  carrera: "Carrera",
+  curso: "Curso",
+  especializacion: "Especialización",
+  workshop: "Workshop",
+};
+
+/**
+ * Puntaje en estrellas: de 1 a 5, con medias. Lo mismo que impone la base,
+ * repetido aca para poder validar antes de mandar el formulario.
+ */
+export const PUNTAJES = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5] as const;
+
+export const formatearEstrellas = (n: number) =>
+  `${n.toLocaleString("es-AR")} ${n === 1 ? "estrella" : "estrellas"}`;

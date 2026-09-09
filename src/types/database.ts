@@ -82,9 +82,11 @@ export type Database = {
           published_by: string | null
           rating: number | null
           related_production_id: string | null
+          reviewed_company_id: string | null
           reviewed_run_id: string | null
+          reviewed_venue_id: string | null
           search_vec: unknown
-          section: "noticias" | "opiniones" | "reviews" | "entrevistas"
+          section: "noticias" | "blog" | "opiniones" | "reviews" | "entrevistas"
           seen_on: string | null
           slug: string
           status:
@@ -108,9 +110,11 @@ export type Database = {
           published_by?: string | null
           rating?: number | null
           related_production_id?: string | null
+          reviewed_company_id?: string | null
           reviewed_run_id?: string | null
+          reviewed_venue_id?: string | null
           search_vec?: unknown
-          section: "noticias" | "opiniones" | "reviews" | "entrevistas"
+          section: "noticias" | "blog" | "opiniones" | "reviews" | "entrevistas"
           seen_on?: string | null
           slug: string
           status?:
@@ -134,9 +138,16 @@ export type Database = {
           published_by?: string | null
           rating?: number | null
           related_production_id?: string | null
+          reviewed_company_id?: string | null
           reviewed_run_id?: string | null
+          reviewed_venue_id?: string | null
           search_vec?: unknown
-          section?: "noticias" | "opiniones" | "reviews" | "entrevistas"
+          section?:
+            | "noticias"
+            | "blog"
+            | "opiniones"
+            | "reviews"
+            | "entrevistas"
           seen_on?: string | null
           slug?: string
           status?:
@@ -171,10 +182,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "articles_reviewed_company_id_fkey"
+            columns: ["reviewed_company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "articles_reviewed_run_id_fkey"
             columns: ["reviewed_run_id"]
             isOneToOne: false
             referencedRelation: "runs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "articles_reviewed_venue_id_fkey"
+            columns: ["reviewed_venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
             referencedColumns: ["id"]
           },
         ]
@@ -223,6 +248,9 @@ export type Database = {
           age_min: number | null
           city: string
           closes_at: string | null
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
           contract_type: string | null
           created_at: string
           dance_styles: string[]
@@ -231,6 +259,7 @@ export type Database = {
           id: string
           is_paid: boolean | null
           is_verified: boolean
+          kind: "obra" | "representacion" | "ensamble"
           opens_at: string | null
           organizer: string
           production_id: string | null
@@ -257,6 +286,9 @@ export type Database = {
           age_min?: number | null
           city?: string
           closes_at?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
           contract_type?: string | null
           created_at?: string
           dance_styles?: string[]
@@ -265,6 +297,7 @@ export type Database = {
           id?: string
           is_paid?: boolean | null
           is_verified?: boolean
+          kind?: "obra" | "representacion" | "ensamble"
           opens_at?: string | null
           organizer: string
           production_id?: string | null
@@ -291,6 +324,9 @@ export type Database = {
           age_min?: number | null
           city?: string
           closes_at?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
           contract_type?: string | null
           created_at?: string
           dance_styles?: string[]
@@ -299,6 +335,7 @@ export type Database = {
           id?: string
           is_paid?: boolean | null
           is_verified?: boolean
+          kind?: "obra" | "representacion" | "ensamble"
           opens_at?: string | null
           organizer?: string
           production_id?: string | null
@@ -329,6 +366,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      companies: {
+        Row: {
+          city: string | null
+          created_at: string
+          description: string | null
+          email: string | null
+          founded_year: number | null
+          id: string
+          logo_path: string | null
+          name: string
+          phone: string | null
+          slug: string
+          socials: Json
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          founded_year?: number | null
+          id?: string
+          logo_path?: string | null
+          name: string
+          phone?: string | null
+          slug: string
+          socials?: Json
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          founded_year?: number | null
+          id?: string
+          logo_path?: string | null
+          name?: string
+          phone?: string | null
+          slug?: string
+          socials?: Json
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
       }
       credits: {
         Row: {
@@ -377,6 +462,92 @@ export type Database = {
             columns: ["run_id"]
             isOneToOne: false
             referencedRelation: "runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          call_closes_at: string | null
+          call_opens_at: string | null
+          city: string
+          created_at: string
+          description: string | null
+          ends_on: string | null
+          has_open_call: boolean
+          how_to_submit: string | null
+          id: string
+          is_verified: boolean
+          kind: "festival" | "ciclo" | "encuentro" | "premiacion" | "concurso"
+          organizer: string | null
+          poster_path: string | null
+          province: string
+          requirements: string | null
+          slug: string
+          source_url: string
+          starts_on: string | null
+          submission_fee: number | null
+          title: string
+          updated_at: string
+          venue_id: string | null
+          website: string | null
+        }
+        Insert: {
+          call_closes_at?: string | null
+          call_opens_at?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          ends_on?: string | null
+          has_open_call?: boolean
+          how_to_submit?: string | null
+          id?: string
+          is_verified?: boolean
+          kind: "festival" | "ciclo" | "encuentro" | "premiacion" | "concurso"
+          organizer?: string | null
+          poster_path?: string | null
+          province?: string
+          requirements?: string | null
+          slug: string
+          source_url: string
+          starts_on?: string | null
+          submission_fee?: number | null
+          title: string
+          updated_at?: string
+          venue_id?: string | null
+          website?: string | null
+        }
+        Update: {
+          call_closes_at?: string | null
+          call_opens_at?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          ends_on?: string | null
+          has_open_call?: boolean
+          how_to_submit?: string | null
+          id?: string
+          is_verified?: boolean
+          kind?: "festival" | "ciclo" | "encuentro" | "premiacion" | "concurso"
+          organizer?: string | null
+          poster_path?: string | null
+          province?: string
+          requirements?: string | null
+          slug?: string
+          source_url?: string
+          starts_on?: string | null
+          submission_fee?: number | null
+          title?: string
+          updated_at?: string
+          venue_id?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_venue_id_fkey"
+            columns: ["venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
             referencedColumns: ["id"]
           },
         ]
@@ -528,6 +699,7 @@ export type Database = {
       runs: {
         Row: {
           closes_on: string | null
+          company_id: string | null
           created_at: string
           id: string
           opens_on: string
@@ -543,6 +715,7 @@ export type Database = {
         }
         Insert: {
           closes_on?: string | null
+          company_id?: string | null
           created_at?: string
           id?: string
           opens_on: string
@@ -558,6 +731,7 @@ export type Database = {
         }
         Update: {
           closes_on?: string | null
+          company_id?: string | null
           created_at?: string
           id?: string
           opens_on?: string
@@ -572,6 +746,13 @@ export type Database = {
           venue_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "runs_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "runs_production_id_fkey"
             columns: ["production_id"]
@@ -745,51 +926,66 @@ export type Database = {
       venues: {
         Row: {
           address: string | null
+          booking_url: string | null
           circuit: "comercial" | "oficial" | "independiente" | null
           city: string
+          contact_note: string | null
           created_at: string
+          email: string | null
           id: string
           lat: number | null
           lng: number | null
           name: string
           neighborhood: string | null
+          phone: string | null
           province: string
           seats: number | null
           slug: string
+          socials: Json
           updated_at: string
           website: string | null
           wheelchair_access: boolean | null
         }
         Insert: {
           address?: string | null
+          booking_url?: string | null
           circuit?: "comercial" | "oficial" | "independiente" | null
           city?: string
+          contact_note?: string | null
           created_at?: string
+          email?: string | null
           id?: string
           lat?: number | null
           lng?: number | null
           name: string
           neighborhood?: string | null
+          phone?: string | null
           province?: string
           seats?: number | null
           slug: string
+          socials?: Json
           updated_at?: string
           website?: string | null
           wheelchair_access?: boolean | null
         }
         Update: {
           address?: string | null
+          booking_url?: string | null
           circuit?: "comercial" | "oficial" | "independiente" | null
           city?: string
+          contact_note?: string | null
           created_at?: string
+          email?: string | null
           id?: string
           lat?: number | null
           lng?: number | null
           name?: string
           neighborhood?: string | null
+          phone?: string | null
           province?: string
           seats?: number | null
           slug?: string
+          socials?: Json
           updated_at?: string
           website?: string | null
           wheelchair_access?: boolean | null
@@ -816,11 +1012,11 @@ export type Database = {
           final_show_title: string | null
           final_show_venue_id: string | null
           id: string
-          kind: "montaje" | "entrenamiento" | "intensivo" | "clinica"
+          kind: "montaje" | "carrera" | "curso" | "especializacion" | "workshop"
           level: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id: string
           slug: string
-          source_url: string | null
+          source_url: string
           starts_on: string | null
           time_from: string | null
           title: string
@@ -847,11 +1043,16 @@ export type Database = {
           final_show_title?: string | null
           final_show_venue_id?: string | null
           id?: string
-          kind: "montaje" | "entrenamiento" | "intensivo" | "clinica"
+          kind?:
+            | "montaje"
+            | "carrera"
+            | "curso"
+            | "especializacion"
+            | "workshop"
           level?: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id: string
           slug: string
-          source_url?: string | null
+          source_url: string
           starts_on?: string | null
           time_from?: string | null
           title: string
@@ -878,11 +1079,16 @@ export type Database = {
           final_show_title?: string | null
           final_show_venue_id?: string | null
           id?: string
-          kind?: "montaje" | "entrenamiento" | "intensivo" | "clinica"
+          kind?:
+            | "montaje"
+            | "carrera"
+            | "curso"
+            | "especializacion"
+            | "workshop"
           level?: "inicial" | "intermedio" | "avanzado" | "todos"
           school_id?: string
           slug?: string
-          source_url?: string | null
+          source_url?: string
           starts_on?: string | null
           time_from?: string | null
           title?: string

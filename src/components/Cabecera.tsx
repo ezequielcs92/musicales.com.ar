@@ -2,11 +2,13 @@ import Link from "next/link";
 
 import { LogoMarca } from "@/components/LogoMarca";
 
+// Siete secciones no entran en una barra. Van las cuatro de mayor intencion
+// de busqueda; el pie lleva el mapa completo.
 const ENLACES = [
   { href: "/cartelera", texto: "Cartelera" },
-  { href: "/criticas", texto: "Críticas" },
   { href: "/talleres", texto: "Talleres" },
   { href: "/audiciones", texto: "Audiciones" },
+  { href: "/criticas", texto: "Críticas" },
 ];
 
 export function Cabecera() {
@@ -29,7 +31,7 @@ export function Cabecera() {
           </span>
         </Link>
 
-        <nav aria-label="Secciones" className="ml-auto hidden gap-7 md:flex">
+        <nav aria-label="Secciones" className="ml-auto hidden gap-6 lg:flex">
           {ENLACES.map((e) => (
             <Link
               key={e.href}

@@ -4,21 +4,21 @@ import { LogoMarca } from "@/components/LogoMarca";
 
 const COLUMNAS = [
   {
-    titulo: "Secciones",
+    titulo: "Qué se da",
     enlaces: [
       { href: "/cartelera", texto: "Cartelera" },
+      { href: "/salas", texto: "Salas" },
       { href: "/criticas", texto: "Críticas" },
-      { href: "/noticias", texto: "Noticias" },
-      { href: "/entrevistas", texto: "Entrevistas" },
+      { href: "/eventos", texto: "Eventos y convocatorias" },
     ],
   },
   {
-    titulo: "Comunidad",
+    titulo: "Para quien hace",
     enlaces: [
-      { href: "/talleres", texto: "Talleres de montaje" },
-      { href: "/audiciones", texto: "Audiciones" },
-      { href: "/cargar/taller", texto: "Cargar un taller" },
-      { href: "/cargar/audicion", texto: "Cargar una audición" },
+      { href: "/talleres", texto: "Talleres y formación" },
+      { href: "/audiciones", texto: "Audiciones y castings" },
+      { href: "/noticias", texto: "Noticias y blog" },
+      { href: "/contacto", texto: "Sumar información" },
     ],
   },
   {
