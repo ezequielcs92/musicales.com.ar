@@ -1,101 +1,324 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
-   Identidad Musicales.com.ar
-   Telon, bombilla, sala, papel y en-cartel. Cada color tiene un trabajo
-   asignado; no se agregan colores nuevos sin actualizar docs/brief-identidad.md.
-
-   El ambar (bombilla) NO es decorativo: significa "esto esta pasando ahora".
-   --------------------------------------------------------------------------- */
+/* ===========================================================================
+   Musicales.com.ar — sistema visual
+   ---------------------------------------------------------------------------
+   El escenario a oscuras y la luz que lo atraviesa. Violeta y magenta no son
+   una moda: son los colores de los focos de teatro. El ambar queda reservado
+   para las lamparas de marquesina y para decir "esto esta pasando ahora"; si
+   se usa de adorno, la cartelera pierde su unica señal.
+   =========================================================================== */
 
 :root {
-  --papel: #f4f3f6;
-  --papel-2: #ffffff;
-  --papel-3: #e9e7ee;
-  --ink: #171320;
-  --ink-soft: #423b50;
-  --muted: #6f6880;
-  --rule: #d9d5e1;
+  /* Superficies claras: la hoja del programa de mano. */
+  --bg: #f8f4fa;
+  --surface: #ffffff;
+  --surface-2: #efe8f2;
+  --text: #160c20;
+  --muted: #675b70;
+  --line: #d9cedf;
 
-  --telon: #9e1b3c;
-  --telon-soft: #f5e3e8;
+  /* Superficies oscuras: la sala. Son un recurso de diseño y NO cambian con
+     el modo del visitante, igual que un teatro esta a oscuras de dia y de noche. */
+  --dark: #10081b;
+  --dark-2: #21132e;
+  --dark-3: #2d1b3d;
+  --on-dark: #ffffff;
+  --on-dark-muted: #dbc8ea;
+
+  /* Marca. */
+  --primary: #4943f0;
+  --primary-hover: #362edf;
+  --primary-soft: #ebeafe;
+  --violet: #b143f0;
+  --magenta: #ed43f0;
+
+  /* El ambar de la marquesina. Significado, no decoracion. */
   --bombilla: #e0ae42;
-  --sala: #171320;
+  --bombilla-glow: #f5c95f;
 
-  --en-cartel: #2c6e52;
-  --en-cartel-bg: #e1efe9;
-  --ultimas: #9c5b12;
-  --ultimas-bg: #f7ebdc;
+  /* Estados de cartelera. */
+  --en-cartel: #12885d;
+  --en-cartel-bg: #dff3ea;
+  --ultimas: #a8570f;
+  --ultimas-bg: #fbeddc;
+
+  --radio: 20px;
+  --radio-sm: 12px;
+  --sombra: 0 18px 50px rgb(43 24 58 / 0.1);
+  --sombra-alta: 0 28px 70px rgb(43 24 58 / 0.16);
+  --ancho: 1180px;
 }
 
-/* Estado por defecto del visitante: el sistema decide y no hay atributo puesto. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --papel: #131019;
-    --papel-2: #1c1826;
-    --papel-3: #262032;
-    --ink: #f0edf4;
-    --ink-soft: #c7c1d2;
-    --muted: #948ca3;
-    --rule: #332b41;
-
-    --telon: #e36285;
-    --telon-soft: #38202b;
-    --bombilla: #f0cb72;
-
-    --en-cartel: #6fc79d;
-    --en-cartel-bg: #1a2e26;
-    --ultimas: #dda05a;
-    --ultimas-bg: #312515;
+    --bg: #0c0614;
+    --surface: #171022;
+    --surface-2: #221833;
+    --text: #f4eefa;
+    --muted: #a294b0;
+    --line: #2f2440;
+    --primary-soft: #1e1b45;
+    --en-cartel: #4ade9f;
+    --en-cartel-bg: #12281f;
+    --ultimas: #f0b45e;
+    --ultimas-bg: #2e2113;
+    --sombra: 0 18px 50px rgb(0 0 0 / 0.45);
+    --sombra-alta: 0 28px 70px rgb(0 0 0 / 0.55);
   }
 }
 
-/* Eleccion explicita del visitante: gana sobre el sistema en ambas direcciones. */
 :root[data-theme="dark"] {
-  --papel: #131019;
-  --papel-2: #1c1826;
-  --papel-3: #262032;
-  --ink: #f0edf4;
-  --ink-soft: #c7c1d2;
-  --muted: #948ca3;
-  --rule: #332b41;
-
-  --telon: #e36285;
-  --telon-soft: #38202b;
-  --bombilla: #f0cb72;
-
-  --en-cartel: #6fc79d;
-  --en-cartel-bg: #1a2e26;
-  --ultimas: #dda05a;
-  --ultimas-bg: #312515;
+  --bg: #0c0614;
+  --surface: #171022;
+  --surface-2: #221833;
+  --text: #f4eefa;
+  --muted: #a294b0;
+  --line: #2f2440;
+  --primary-soft: #1e1b45;
+  --en-cartel: #4ade9f;
+  --en-cartel-bg: #12281f;
+  --ultimas: #f0b45e;
+  --ultimas-bg: #2e2113;
+  --sombra: 0 18px 50px rgb(0 0 0 / 0.45);
+  --sombra-alta: 0 28px 70px rgb(0 0 0 / 0.55);
 }
 
 @theme inline {
-  --color-papel: var(--papel);
-  --color-papel-2: var(--papel-2);
-  --color-papel-3: var(--papel-3);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
   --color-muted: var(--muted);
-  --color-rule: var(--rule);
-  --color-telon: var(--telon);
-  --color-telon-soft: var(--telon-soft);
+  --color-line: var(--line);
+  --color-dark: var(--dark);
+  --color-dark-2: var(--dark-2);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+  --color-primary: var(--primary);
+  --color-violet: var(--violet);
+  --color-magenta: var(--magenta);
   --color-bombilla: var(--bombilla);
-  --color-sala: var(--sala);
   --color-en-cartel: var(--en-cartel);
   --color-en-cartel-bg: var(--en-cartel-bg);
   --color-ultimas: var(--ultimas);
   --color-ultimas-bg: var(--ultimas-bg);
 
-  --font-display: var(--font-poppins), "Helvetica Neue", Arial, sans-serif;
-  --font-serif: var(--font-poppins), Arial, sans-serif;
-  --font-mono: var(--font-poppins), Arial, sans-serif;
+  --font-display: var(--font-anton), "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-poppins), "Segoe UI", Arial, sans-serif;
 }
 
+/* --- Base ---------------------------------------------------------------- */
+
 body {
-  background: var(--papel);
-  color: var(--ink);
-  font-family: var(--font-serif);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--violet);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Estructura ---------------------------------------------------------- */
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.seccion {
+  padding-block: clamp(64px, 9vw, 118px);
+}
+
+/* La sala: siempre oscura, en cualquier modo. */
+.seccion-oscura {
+  background: var(--dark);
+  color: var(--on-dark);
+}
+.seccion-oscura .apagado {
+  color: var(--on-dark-muted);
+}
+
+/* --- Tipografia ---------------------------------------------------------- */
+
+.antetitulo {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  /* El violeta de marca no llega al contraste minimo en texto chico sobre
+     fondo claro (~3,3:1). El indigo si. */
+  color: var(--primary);
+}
+.seccion-oscura .antetitulo {
+  color: #c9a0f0;
+}
+
+.titular {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+}
+
+.titular-seccion {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+}
+
+/* El acento va en una linea del titular, no en todo: si brilla todo, no brilla nada. */
+.destacado {
+  background: linear-gradient(96deg, var(--violet), var(--magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bajada {
+  font-size: 1.06rem;
+  color: var(--muted);
+  max-width: 56ch;
+}
+.seccion-oscura .bajada {
+  color: var(--on-dark-muted);
+}
+
+/* --- Botones ------------------------------------------------------------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 13px 26px;
+  font-weight: 600;
+  font-size: 0.94rem;
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+.boton:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.boton-fantasma {
+  background: transparent;
+  color: inherit;
+  border-color: var(--line);
+}
+.seccion-oscura .boton-fantasma {
+  border-color: rgb(255 255 255 / 0.22);
+}
+.boton-fantasma:hover {
+  background: transparent;
+  border-color: var(--violet);
+  transform: translateY(-1px);
+}
+
+/* --- Tarjetas ------------------------------------------------------------ */
+
+.tarjeta {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tarjeta-enlace:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-alta);
+}
+
+.seccion-oscura .tarjeta {
+  background: rgb(33 19 46 / 0.78);
+  border-color: rgb(61 44 75 / 0.9);
+  box-shadow: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chip-cartel { background: var(--en-cartel-bg); color: var(--en-cartel); }
+.chip-ultimas { background: var(--ultimas-bg); color: var(--ultimas); }
+.chip-estreno { background: var(--primary-soft); color: var(--primary); }
+.seccion-oscura .chip-estreno { background: rgb(73 67 240 / 0.22); color: #b9b5ff; }
+
+/* --- Marquesina: el gesto de la marca ------------------------------------ */
+
+.bombillas {
+  display: flex;
+  gap: 10px;
+}
+.bombillas i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bombilla-glow);
+  box-shadow: 0 0 10px rgb(245 201 95 / 0.55);
+}
+
+/* Una sola secuencia al cargar: la marquesina se enciende y se queda prendida.
+   Nada queda esperando un scroll para volverse visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .bombillas i {
+    animation: encender 0.5s backwards;
+  }
+  .bombillas i:nth-child(2) { animation-delay: 0.06s; }
+  .bombillas i:nth-child(3) { animation-delay: 0.12s; }
+  .bombillas i:nth-child(4) { animation-delay: 0.18s; }
+  .bombillas i:nth-child(5) { animation-delay: 0.24s; }
+  .bombillas i:nth-child(6) { animation-delay: 0.3s; }
+  .bombillas i:nth-child(7) { animation-delay: 0.36s; }
+  .bombillas i:nth-child(8) { animation-delay: 0.42s; }
+
+  .entrada {
+    animation: entrar 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+  .entrada-2 { animation-delay: 0.08s; }
+  .entrada-3 { animation-delay: 0.16s; }
+  .entrada-4 { animation-delay: 0.24s; }
+}
+
+@keyframes encender {
+  from { opacity: 0; box-shadow: none; }
+  to { opacity: 1; }
+}
+
+/* Solo transform y opacity: la GPU las resuelve sin recalcular el layout. */
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Parte del publico del teatro musical tiene sensibilidad vestibular:
