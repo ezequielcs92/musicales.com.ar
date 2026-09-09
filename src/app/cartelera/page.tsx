@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const PROMESAS = [
   { clave: "Funciones, no temporadas", texto: "Qué se da hoy y a qué hora, no una lista genérica que quedó vieja en marzo." },
   { clave: "Elenco de esa función", texto: "Titular, alternate, cover o swing. Quién estaba realmente la noche que fuiste." },
-  { clave: "Precios desde y hasta", texto: "El rango real de platea, con enlace a la boletería oficial." },
+  { clave: "Dónde comprar", texto: "Enlace directo a la boletería oficial. No publicamos precios: los de la boletería siempre están al día y los nuestros no." },
   { clave: "Filtros que sirven", texto: "Por sala, barrio, día y precio. Para decidir la salida de esta noche." },
 ];
 

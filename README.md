@@ -165,6 +165,14 @@ servirian el mismo contenido en dos direcciones indexables.
 - **Ningun bloque de publicidad dentro de un contenedor animado**, y todo espacio
   publicitario con altura reservada. Es lo que mantiene el CLS bajo control.
 - **Solo se animan `transform` y `opacity`.**
+- **El sitio NO publica precios.** Ni aranceles de formación, ni entradas, ni
+  costos de convocatoria. La base directamente no tiene esas columnas: se
+  quitaron en `20260909180000_sin_precios.sql`. En su lugar va el enlace a la
+  fuente, donde el valor está vigente. Un precio viejo es peor que ninguno,
+  porque promete algo que la sala o la escuela no va a cumplir.
+- **La ficha reproduce lo que informa la fuente y enlaza a ella.** No se
+  parafrasea ni se completa por inferencia. Por eso `workshops.source_url` es
+  obligatorio en la base.
 
 ## Documentacion
 

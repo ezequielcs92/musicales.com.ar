@@ -118,9 +118,9 @@ for (const t of datos.talleres) {
     time_from: t.time_from ?? null,
     final_show: t.final_show ?? false,
     audition_required: t.audition_required ?? false,
-    fee_ars: t.fee_ars ?? null,
-    fee_period: t.fee_period ?? null,
     enrollment_open: t.enrollment_open ?? false,
+    // Sin precios, por decision editorial. Si el relevamiento trae un monto,
+    // se descarta: la base ya no tiene donde ponerlo.
     source_url,
     // Nulo a propósito: relevado no es verificado. Lo completa una persona.
     verified_at: null,

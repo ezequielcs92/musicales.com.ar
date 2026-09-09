@@ -486,7 +486,6 @@ export type Database = {
           slug: string
           source_url: string
           starts_on: string | null
-          submission_fee: number | null
           title: string
           updated_at: string
           venue_id: string | null
@@ -511,7 +510,6 @@ export type Database = {
           slug: string
           source_url: string
           starts_on?: string | null
-          submission_fee?: number | null
           title: string
           updated_at?: string
           venue_id?: string | null
@@ -536,7 +534,6 @@ export type Database = {
           slug?: string
           source_url?: string
           starts_on?: string | null
-          submission_fee?: number | null
           title?: string
           updated_at?: string
           venue_id?: string | null
@@ -703,8 +700,6 @@ export type Database = {
           created_at: string
           id: string
           opens_on: string
-          price_max: number | null
-          price_min: number | null
           producer: string | null
           production_id: string
           status: "anunciada" | "en_cartel" | "finalizada"
@@ -719,8 +714,6 @@ export type Database = {
           created_at?: string
           id?: string
           opens_on: string
-          price_max?: number | null
-          price_min?: number | null
           producer?: string | null
           production_id: string
           status?: "anunciada" | "en_cartel" | "finalizada"
@@ -735,8 +728,6 @@ export type Database = {
           created_at?: string
           id?: string
           opens_on?: string
-          price_max?: number | null
-          price_min?: number | null
           producer?: string | null
           production_id?: string
           status?: "anunciada" | "en_cartel" | "finalizada"
@@ -1006,8 +997,6 @@ export type Database = {
           ends_on: string | null
           enrollment_deadline: string | null
           enrollment_open: boolean
-          fee_ars: number | null
-          fee_period: string | null
           final_show: boolean
           final_show_title: string | null
           final_show_venue_id: string | null
@@ -1037,8 +1026,6 @@ export type Database = {
           ends_on?: string | null
           enrollment_deadline?: string | null
           enrollment_open?: boolean
-          fee_ars?: number | null
-          fee_period?: string | null
           final_show?: boolean
           final_show_title?: string | null
           final_show_venue_id?: string | null
@@ -1073,8 +1060,6 @@ export type Database = {
           ends_on?: string | null
           enrollment_deadline?: string | null
           enrollment_open?: boolean
-          fee_ars?: number | null
-          fee_period?: string | null
           final_show?: boolean
           final_show_title?: string | null
           final_show_venue_id?: string | null

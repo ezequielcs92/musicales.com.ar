@@ -12,7 +12,7 @@ const PROMESAS = [
   { clave: "Montaje o entrenamiento", texto: "Un taller que termina en función no es una clase semanal. Son dos búsquedas y acá son dos filtros." },
   { clave: "Con inscripción abierta", texto: "Filtrable por si está tomando gente ahora y hasta cuándo." },
   { clave: "Si pide audición previa", texto: "Para saber si podés anotarte directo o hay que preparar algo." },
-  { clave: "Precio y modalidad", texto: "Cuota, duración, día y horario. Los datos que decidís antes de escribir un mensaje." },
+  { clave: "Modalidad y horario", texto: "Duración, día y hora. Para los aranceles enlazamos a la escuela: es información que cambia y que le corresponde informar a ella." },
 ];
 
 export default function Talleres() {
@@ -20,7 +20,7 @@ export default function Talleres() {
     <SeccionEnPreparacion
       antetitulo="En preparación"
       titulo={"Talleres de montaje, separados del entrenamiento."}
-      bajada={"Dónde formarte, con qué modalidad, cuánto sale y si termina en función."}
+      bajada={"Dónde formarte, con qué modalidad, en qué horario y si termina en función."}
       promesas={PROMESAS}
       cuando={"Estamos relevando las escuelas del área metropolitana. Si dirigís una y querés aparecer, escribinos: no tiene costo ni contraprestación."}
     />

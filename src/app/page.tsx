@@ -40,7 +40,7 @@ const SECCIONES = [
   {
     titulo: "Cartelera",
     texto:
-      "Qué musicales hay hoy, en qué sala, a qué hora y desde cuánto. Con las funciones reales, no una lista que quedó vieja en marzo.",
+      "Qué musicales hay hoy, en qué sala y a qué hora, con enlace a la boletería. Con las funciones reales, no una lista que quedó vieja en marzo.",
   },
   {
     titulo: "Críticas",
