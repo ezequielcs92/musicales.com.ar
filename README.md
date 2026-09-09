@@ -42,6 +42,7 @@ npm run dev
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run probar:politicas` | Prueba las politicas RLS con usuarios reales de cada rol |
 | `node scripts/crear-usuario.mjs <email> <rol>` | Da de alta a alguien en la redaccion o le cambia el rol |
+| `node scripts/cambiar-clave.mjs <email>` | Asigna o cambia una contraseña (la pide por teclado, no se muestra) |
 
 **Antes de cada despliegue hay que pasar por `npm run preview`.** El
 comportamiento de `next dev` y el del worker no son identicos, y descubrir la
@@ -66,6 +67,23 @@ paga una vez y no se repite por cada seccion nueva.
 
 Conviene medir al cerrar cada fase. Si se acerca al techo, el panel de
 administracion sale a su propio worker antes que pagar el plan.
+
+## Acceso al panel
+
+Ingreso con **correo y contraseña**, no con enlace por correo: el enlace depende
+de que el correo llegue, y el servicio que trae Supabase de fabrica tiene un
+limite bajo de envios y suele caer en spam. Una contraseña no depende de nada
+externo.
+
+Alta de alguien nuevo, en dos pasos:
+
+```bash
+node scripts/crear-usuario.mjs redactor@ejemplo.com colaborador
+node scripts/cambiar-clave.mjs redactor@ejemplo.com
+```
+
+No hay recuperacion de contraseña por correo todavia, por el mismo motivo. Si
+alguien la olvida, un administrador le asigna una nueva con el segundo comando.
 
 ## Prueba de las politicas
 

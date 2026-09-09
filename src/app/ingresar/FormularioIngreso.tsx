@@ -1,91 +1,62 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 
-import { createClient } from "@/lib/supabase/client";
+import { ingresar, type EstadoIngreso } from "./acciones";
 
-type Estado = "listo" | "enviando" | "enviado" | "error";
+function Boton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="bg-sala px-5 py-3 font-display text-sm uppercase tracking-wide text-papel transition-opacity hover:opacity-90 disabled:opacity-50 dark:bg-papel-3 dark:text-ink"
+    >
+      {pending ? "Entrando…" : "Entrar"}
+    </button>
+  );
+}
 
-/**
- * Ingreso por enlace de un solo uso.
- *
- * Sin contraseñas a proposito: la redaccion son unas pocas personas y una
- * contraseña mas es una contraseña mas que se puede filtrar, reutilizar o
- * perder. El enlace llega al correo y vence solo.
- */
 export function FormularioIngreso({ volver }: { volver: string }) {
-  const [email, setEmail] = useState("");
-  const [estado, setEstado] = useState<Estado>("listo");
-  const [detalle, setDetalle] = useState("");
+  const [estado, accion] = useActionState<EstadoIngreso, FormData>(ingresar, {});
 
-  async function enviar(e: React.FormEvent) {
-    e.preventDefault();
-    setEstado("enviando");
-
-    const supabase = createClient();
-    const destino = new URL("/auth/callback", window.location.origin);
-    destino.searchParams.set("volver", volver);
-
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: destino.toString() },
-    });
-
-    if (error) {
-      setEstado("error");
-      setDetalle(error.message);
-      return;
-    }
-    setEstado("enviado");
-  }
-
-  if (estado === "enviado") {
-    return (
-      <div className="flex flex-col gap-3">
-        <p className="font-display text-xl">Revisá tu correo.</p>
-        <p className="text-ink-soft">
-          Le mandamos un enlace de acceso a <strong>{email}</strong>. Vence en una
-          hora y sirve una sola vez.
-        </p>
-        <button
-          type="button"
-          onClick={() => setEstado("listo")}
-          className="self-start font-mono text-[0.7rem] uppercase tracking-[0.1em] text-telon underline underline-offset-4"
-        >
-          Usar otra dirección
-        </button>
-      </div>
-    );
-  }
+  const campo =
+    "w-full border border-rule bg-papel-2 px-4 py-3 text-base outline-none focus-visible:border-telon focus-visible:ring-1 focus-visible:ring-telon";
+  const etiqueta =
+    "font-mono text-[0.68rem] uppercase tracking-[0.13em] text-muted";
 
   return (
-    <form onSubmit={enviar} className="flex flex-col gap-4">
+    <form action={accion} className="flex flex-col gap-4">
+      <input type="hidden" name="volver" value={volver} />
+
       <label className="flex flex-col gap-2">
-        <span className="font-mono text-[0.68rem] uppercase tracking-[0.13em] text-muted">
-          Correo electrónico
-        </span>
+        <span className={etiqueta}>Correo electrónico</span>
         <input
           type="email"
+          name="email"
           required
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border border-rule bg-papel-2 px-4 py-3 text-base outline-none focus-visible:border-telon focus-visible:ring-1 focus-visible:ring-telon"
+          autoComplete="username"
+          className={campo}
         />
       </label>
 
-      <button
-        type="submit"
-        disabled={estado === "enviando"}
-        className="bg-sala px-5 py-3 font-display text-sm uppercase tracking-wide text-papel transition-opacity hover:opacity-90 disabled:opacity-50 dark:bg-papel-3 dark:text-ink"
-      >
-        {estado === "enviando" ? "Enviando…" : "Enviar enlace de acceso"}
-      </button>
+      <label className="flex flex-col gap-2">
+        <span className={etiqueta}>Contraseña</span>
+        <input
+          type="password"
+          name="password"
+          required
+          autoComplete="current-password"
+          className={campo}
+        />
+      </label>
 
-      {estado === "error" && (
+      <Boton />
+
+      {estado.error && (
         <p role="alert" className="text-sm text-telon">
-          No pudimos enviar el enlace: {detalle}. Revisá que la dirección esté
-          bien escrita y volvé a intentar.
+          {estado.error}
         </p>
       )}
     </form>

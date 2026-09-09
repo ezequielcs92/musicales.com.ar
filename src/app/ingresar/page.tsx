@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default async function Ingresar({ searchParams }: PageProps<"/ingresar">) {
   const params = await searchParams;
   const volver = typeof params.volver === "string" ? params.volver : "/admin";
-  const enlaceVencido = params.error === "enlace";
 
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-9 px-6 py-20">
@@ -27,20 +26,11 @@ export default async function Ingresar({ searchParams }: PageProps<"/ingresar">)
         </div>
       </header>
 
-      {enlaceVencido && (
-        <p
-          role="alert"
-          className="border-l-2 border-telon bg-telon-soft px-4 py-3 text-sm text-ink-soft"
-        >
-          Ese enlace ya venció o se usó antes. Pedí uno nuevo abajo.
-        </p>
-      )}
-
       <FormularioIngreso volver={volver} />
 
       <p className="text-center text-xs leading-relaxed text-muted">
-        El panel es solo para la redacción. Si llegaste acá por error, podés
-        volver a{" "}
+        ¿Olvidaste la contraseña? Pedísela a un administrador: puede asignarte
+        una nueva. También podés volver a{" "}
         <Link href="/" className="text-telon underline underline-offset-2">
           la portada
         </Link>
