@@ -111,10 +111,11 @@ export default function Home() {
               <p className="antetitulo">Teatro musical argentino</p>
             </div>
 
-            <h1 className="titular entrada entrada-2">
-              Todo el musical
-              <br />
-              argentino en{" "}
+            {/* Sin salto manual: Friend Bestie es mas ancha que la sustituta
+                que habia antes y un <br> fijo estiraba el titular a cinco
+                renglones. Se deja que corte solo dentro de su medida. */}
+            <h1 className="titular entrada entrada-2 max-w-[11ch]">
+              Todo el musical argentino en{" "}
               <span className="destacado">un solo lugar.</span>
             </h1>
 

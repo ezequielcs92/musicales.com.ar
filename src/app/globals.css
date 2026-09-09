@@ -104,7 +104,7 @@
   --color-ultimas: var(--ultimas);
   --color-ultimas-bg: var(--ultimas-bg);
 
-  --font-display: var(--font-anton), "Arial Narrow", Impact, sans-serif;
+  --font-display: var(--font-friend), "Arial Black", Impact, sans-serif;
   --font-sans: var(--font-poppins), "Segoe UI", Arial, sans-serif;
 }
 
@@ -174,7 +174,7 @@ body {
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-wrap: balance;
-  font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+  font-size: clamp(2.2rem, 5.4vw, 4.1rem);
 }
 
 .titular-seccion {

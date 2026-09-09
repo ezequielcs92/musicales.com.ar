@@ -105,6 +105,16 @@ Notas que importan:
 
 ---
 
+> **Licencia tipográfica.** Friend Bestie se usa bajo **licencia webfont
+> adquirida** (2026-09-09). Guardá el comprobante: el archivo `Read Me.txt` del
+> paquete original advierte que el uso comercial sin licencia se cobra a 5x la
+> licencia mundial.
+>
+> En el repositorio vive `src/fonts/friend-bestie.woff2`, subconjuntado a
+> caracteres latinos (43 KB frente a 70 KB del `.otf`). **No reemplazar por el
+> `.otf` completo ni servirlo desde otro dominio:** la licencia webfont cubre
+> este sitio, no la redistribución del archivo.
+
 ## 4. Tipografía
 
 Tres familias, todas de Google Fonts, todas gratuitas para uso comercial.
