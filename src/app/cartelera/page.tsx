@@ -105,7 +105,9 @@ export default async function Cartelera() {
 
                 <div className="flex flex-col gap-1">
                   <h2 className="font-display text-2xl uppercase leading-none tracking-tight">
-                    {obra?.title}
+                    <Link href={`/obra/${obra?.slug}`} className="hover:underline">
+                      {obra?.title}
+                    </Link>
                   </h2>
                   <p className="text-sm text-[var(--muted)]">
                     {sala?.name}

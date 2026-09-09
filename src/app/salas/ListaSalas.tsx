@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useDeferredValue, useMemo, useState } from "react";
 
 export type SalaPublica = {
@@ -118,7 +119,9 @@ export function ListaSalas({ salas }: { salas: SalaPublica[] }) {
               <li key={s.id} className="tarjeta flex flex-col gap-3 p-5">
                 <div className="flex flex-col gap-1">
                   <h2 className="font-display text-lg uppercase leading-tight tracking-tight">
-                    {s.name}
+                    <Link href={`/sala/${s.slug}`} className="hover:underline">
+                      {s.name}
+                    </Link>
                   </h2>
                   <p className="text-sm text-[var(--muted)]">
                     {s.address}
