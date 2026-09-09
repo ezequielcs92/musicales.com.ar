@@ -1,0 +1,247 @@
+{
+  "relevamiento": {
+    "fecha": "2026-09-09",
+    "alcance": "CABA y Gran Buenos Aires",
+    "metodo": "Búsqueda web y lectura de los sitios oficiales de cada escuela.",
+    "advertencia": "Nada de esto está confirmado con la escuela. Los precios y horarios cambian sin aviso y varias escuelas no los publican. Verificar antes de publicar: cada ficha lleva `verificado: false` hasta que alguien lo chequee.",
+    "campos_faltantes_sistematicos": "Precio y horario son los datos que casi ninguna escuela publica. Comunicanto es la excepción. Ese hueco es, justamente, la oportunidad del sitio."
+  },
+
+  "escuelas": [
+    {
+      "slug": "comunicanto",
+      "name": "Comunicanto",
+      "city": "Vicente López",
+      "neighborhood": "Florida Oeste",
+      "province": "Buenos Aires",
+      "website": "https://www.comunicanto.com.ar/",
+      "phone": "11-5885-1432",
+      "whatsapp": "https://wa.me/5491158851432",
+      "verificado": false,
+      "fuente": "https://www.comunicanto.com.ar/comedia.asp",
+      "nota": "La única del relevamiento que publica precios y horarios completos."
+    },
+    {
+      "slug": "adi-studio",
+      "name": "ADI Studio",
+      "city": "Ciudad Autónoma de Buenos Aires",
+      "neighborhood": "Belgrano",
+      "province": "CABA",
+      "address": "Delgado 1455",
+      "website": "https://www.adistudio.com.ar/",
+      "phone": "011 4551-2183",
+      "socials": { "instagram": "adimovimientoenevolucion" },
+      "verificado": false,
+      "fuente": "https://www.adistudio.com.ar/instituto/4/tallercomediamusical",
+      "nota": "Segunda sede en Caseros: David Magdalena 3032, tel. 011 5292-6760, IG @adi_caseros. Cargar como escuela aparte o como sede, según se resuelva el modelo."
+    },
+    {
+      "slug": "escuela-juan-rodo",
+      "name": "Escuela Juan Rodó",
+      "city": "Ciudad Autónoma de Buenos Aires",
+      "neighborhood": "Palermo",
+      "province": "CABA",
+      "address": "Godoy Cruz 2655",
+      "website": "https://escuelajuanrodo.com.ar/",
+      "phone": "+54 11 5583399858",
+      "email": "contacto@escuelajuanrodo.com.ar",
+      "socials": { "instagram": "escuelajuanrodo" },
+      "verificado": false,
+      "fuente": "https://escuelajuanrodo.com.ar/",
+      "nota": "Barrio inferido por la dirección (Godoy Cruz 2655 cae en Palermo). Confirmar."
+    },
+    {
+      "slug": "ea-artes",
+      "name": "Ea-Artes",
+      "city": "Ciudad Autónoma de Buenos Aires",
+      "neighborhood": "Monserrat",
+      "province": "CABA",
+      "address": "Bernardo de Irigoyen 172",
+      "website": "https://www.escuela-argentina.com.ar/",
+      "phone": "+54 9 11 2157-7500",
+      "socials": { "instagram": "eaartes_escuela_teatro_musical" },
+      "verificado": false,
+      "fuente": "https://www.escuela-argentina.com.ar/",
+      "nota": "El sitio solo publica los niveles por edad. El detalle de cada taller está en páginas internas o hay que pedirlo. Requiere segunda pasada."
+    }
+  ],
+
+  "talleres": [
+    {
+      "school_slug": "comunicanto",
+      "title": "Comedia Musical · Infantil 6 a 10",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "inicial",
+      "age_min": 6,
+      "age_max": 10,
+      "weekday": 1,
+      "time_from": "18:15",
+      "time_to": "19:45",
+      "final_show": true,
+      "fee_ars": 50000,
+      "fee_period": "mensual",
+      "enrollment_open": true,
+      "enrollment_note": "El sitio decía «últimos días de inscripción» al relevar.",
+      "verificado": false
+    },
+    {
+      "school_slug": "comunicanto",
+      "title": "Comedia Musical · Infantil 10 a 13",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "inicial",
+      "age_min": 10,
+      "age_max": 13,
+      "weekday": 2,
+      "time_from": "18:15",
+      "time_to": "19:45",
+      "final_show": true,
+      "fee_ars": 50000,
+      "fee_period": "mensual",
+      "enrollment_open": true,
+      "verificado": false
+    },
+    {
+      "school_slug": "comunicanto",
+      "title": "Comedia Musical · Jóvenes 14 a 18",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "intermedio",
+      "age_min": 14,
+      "age_max": 18,
+      "weekday": 4,
+      "time_from": "19:00",
+      "time_to": "20:45",
+      "final_show": true,
+      "fee_ars": 52000,
+      "fee_period": "mensual",
+      "enrollment_open": true,
+      "verificado": false
+    },
+    {
+      "school_slug": "comunicanto",
+      "title": "Comedia Musical · Jóvenes y adultos",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "todos",
+      "age_min": 18,
+      "weekday": 2,
+      "time_from": "20:00",
+      "time_to": "22:00",
+      "final_show": true,
+      "fee_ars": 54000,
+      "fee_period": "mensual",
+      "enrollment_open": true,
+      "verificado": false
+    },
+
+    {
+      "school_slug": "adi-studio",
+      "title": "Taller de Comedia Musical para Niños",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "inicial",
+      "age_min": 7,
+      "age_max": 12,
+      "final_show": true,
+      "final_show_note": "Montajes de comedias musicales completas en salas teatrales.",
+      "horas_semanales": 3,
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"]
+    },
+    {
+      "school_slug": "adi-studio",
+      "title": "Taller de Comedia Musical Teens",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "intermedio",
+      "age_min": 13,
+      "age_max": 15,
+      "final_show": true,
+      "horas_semanales": 4,
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"]
+    },
+    {
+      "school_slug": "adi-studio",
+      "title": "Taller de Comedia Musical Adultos",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "todos",
+      "age_min": 18,
+      "final_show": true,
+      "horas_semanales": 3,
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"]
+    },
+
+    {
+      "school_slug": "escuela-juan-rodo",
+      "title": "Taller formativo para niños",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "inicial",
+      "age_min": 7,
+      "age_max": 11,
+      "final_show": true,
+      "final_show_note": "Montaje de distintos cuadros musicales.",
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"]
+    },
+    {
+      "school_slug": "escuela-juan-rodo",
+      "title": "Taller para adolescentes",
+      "kind": "montaje",
+      "disciplines": ["canto", "danza", "actuacion"],
+      "level": "intermedio",
+      "age_min": 12,
+      "age_max": 16,
+      "final_show": true,
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"]
+    },
+    {
+      "school_slug": "escuela-juan-rodo",
+      "title": "Formación de tres años",
+      "kind": "entrenamiento",
+      "disciplines": ["canto", "danza", "actuacion", "integral"],
+      "level": "avanzado",
+      "age_min": 17,
+      "age_max": 50,
+      "duration_years": 3,
+      "final_show": true,
+      "final_show_note": "Obras de texto, conciertos de canto, muestras coreográficas y musicales integrales.",
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion"],
+      "nota_clasificacion": "Es carrera, no taller. El esquema todavía no tiene ese tipo; ver si `workshop_kind` necesita un valor `carrera`."
+    },
+    {
+      "school_slug": "escuela-juan-rodo",
+      "title": "Taller de Montaje Profesional (TMP)",
+      "kind": "montaje",
+      "disciplines": ["integral"],
+      "level": "avanzado",
+      "final_show": true,
+      "final_show_note": "Montaje de repertorio internacional.",
+      "audition_required": true,
+      "audition_note": "Restringido a alumnos avanzados y egresados. Confirmar si hay audición formal o es solo por trayecto interno.",
+      "verificado": false,
+      "faltan": ["dia", "horario", "precio", "inscripcion", "abierto_a_externos"]
+    }
+  ],
+
+  "descartadas": [
+    { "sitio": "https://www.bactaller.com/", "motivo": "El dominio no resuelve." },
+    { "sitio": "https://www.actart.com.ar/", "motivo": "El dominio no resuelve." },
+    { "sitio": "https://estudiodecomediasmusicales.com.ar/", "motivo": "Devuelve 403 a lectura automática. Requiere visita manual." }
+  ],
+
+  "pendientes": [
+    "Ea-Artes: entrar a las páginas de cada nivel para el detalle de talleres.",
+    "Estudio de Comedias Musicales: visitar a mano, bloquea lectura automática.",
+    "Act&Art y Taller Bac: buscar si migraron a otro dominio o solo a Instagram.",
+    "Escuelas del conurbano sur y oeste: el relevamiento quedó sesgado a CABA y zona norte.",
+    "Confirmar con cada escuela precio, horario y estado de inscripción."
+  ]
+}
