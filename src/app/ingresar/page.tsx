@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Isotipo } from "@/components/Marquesina";
+import { Isotipo } from "@/components/LogoMarca";
 
 import { FormularioIngreso } from "./FormularioIngreso";
 

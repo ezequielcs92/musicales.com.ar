@@ -1,4 +1,4 @@
-import { Marquesina } from "@/components/Marquesina";
+import { LogoMarca } from "@/components/LogoMarca";
 
 const SECCIONES = [
   { nombre: "Cartelera", detalle: "Que musicales hay en cartel, donde y a que precio" },
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-14 px-6 py-20">
       <header className="flex flex-col items-center gap-7 text-center">
-        <Marquesina size={34} bulbs={13} />
+        <LogoMarca size={34} />
         <p className="font-mono text-[0.7rem] uppercase tracking-[0.26em] text-muted">
           Teatro musical argentino
         </p>

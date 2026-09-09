@@ -1,5 +1,18 @@
 # Brief de identidad · Musicales.com.ar
 
+## Actualización vigente del usuario · 2026-09-09
+
+- La marquesina y las lámparas quedan **descartadas**. El usuario pidió un logo desde cero.
+- **Símbolo y concepto aprobados:** conservar el monograma original de dos trazos curvos. Por decisión posterior del usuario, el nombre que acompaña al símbolo usará la misma tipografía que los títulos.
+- **Elección definitiva: Friend Bestie, variante sans serif gruesa y redondeada, para el nombre del logo y los títulos. Poppins para textos y controles.** Confirmada por el usuario el 2026-09-09. Las comparativas previas quedan históricas.
+- **Logo actualizado localmente:** Friend Bestie aplicada al nombre desde el ZIP aportado por el usuario. Símbolo conservado exactamente; SVG con letras a curvas, PNG, Open Graph y componente web actualizados. Los títulos de página y el manual PDF todavía requieren la actualización tipográfica correspondiente.
+- El archivo `Read Me.txt` del ZIP indica uso personal únicamente. Licencia comercial pendiente para publicación; no se realizó despliegue.
+- Entrega actual en `output/identidad-v2/`; manual vigente de la propuesta en `output/pdf/Musicales-com-ar-Manual-de-identidad-v2.pdf`.
+- El manual y kit v1 se conservan como históricos. Sus reglas de logo y tipografía ya no gobiernan el proyecto.
+- Administrador con barra lateral y editor visual Tiptap, siguiendo la referencia WordPress/TinyMCE. Contenido persistido en Markdown. No se desplegó a producción.
+
+**El brief v2 que sigue se conserva como referencia histórica. Las indicaciones anteriores prevalecen donde hay conflicto.**
+
 > **Cómo usar este documento.** La identidad ya está definida: nombre, concepto,
 > paleta y tipografías son decisiones tomadas, no sugerencias. Lo que se pide es
 > **ejecutarlas y producir los archivos**, no reinterpretarlas. Si algo parece

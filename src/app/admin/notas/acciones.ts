@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { sesion } from "@/lib/auth";
-import { estadosPermitidos, puedeRedactar, type Estado } from "@/lib/editorial";
+import { estadosPermitidos, puedeRedactar, esStaff, SECCIONES, type Estado } from "@/lib/editorial";
 
 export type EstadoFormulario = { error?: string; ok?: string };
 
@@ -53,7 +53,11 @@ export async function guardarNota(
   const body_mdx = String(formData.get("body_mdx") ?? "");
 
   if (!title) return { error: "La nota necesita un título." };
-  if (!section) return { error: "Elegí una sección." };
+  if (!SECCIONES.some((item) => item.valor === section)) return { error: "Elegí una sección válida." };
+  if (title.length > 220) return { error: "El título puede tener hasta 220 caracteres." };
+  if (dek.length > 600) return { error: "La bajada puede tener hasta 600 caracteres." };
+  if (body_mdx.length > 400000) return { error: "El cuerpo supera el tamaño permitido." };
+  if (id && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return { error: "La nota no tiene un identificador válido." };
 
   if (!estadosPermitidos(s.rol).includes(status)) {
     return {
@@ -74,6 +78,7 @@ export async function guardarNota(
 
   // --- Nota nueva ---------------------------------------------------------
   if (!id) {
+    if (!aSlug(title)) return { error: "Incluí letras o números en el título." };
     const { data, error } = await s.supabase
       .from("articles")
       .insert({ ...campos, slug: aSlug(title), author_id: s.user.id })
@@ -81,11 +86,17 @@ export async function guardarNota(
       .single();
 
     if (error) return { error: explicar(error) };
+    revalidatePath("/admin");
     revalidatePath("/admin/notas");
     redirect(`/admin/notas/${data.id}`);
   }
 
   // --- Nota existente -----------------------------------------------------
+  const { data: original, error: errorLectura } = await s.supabase.from("articles").select("author_id, status").eq("id", id).maybeSingle();
+  if (errorLectura || !original) return { error: "No se pudo abrir la nota para guardar los cambios." };
+  if (!esStaff(s.rol) && (original.author_id !== s.user.id || (s.rol === "colaborador" && original.status !== "borrador"))) {
+    return { error: "Ya no tenés permiso para editar esta nota." };
+  }
   const { data, error } = await s.supabase
     .from("articles")
     .update(campos)
@@ -103,6 +114,7 @@ export async function guardarNota(
     };
   }
 
+  revalidatePath("/admin");
   revalidatePath("/admin/notas");
   revalidatePath(`/admin/notas/${id}`);
   return { ok: "Cambios guardados." };
